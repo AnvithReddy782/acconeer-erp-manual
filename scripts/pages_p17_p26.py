@@ -4,13 +4,13 @@ from generate_complete_manual import window_frame
 def get_page_17():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Human_Resources/02_Employee_Directory.png",
-        "Employee Master Directory with UAE Labour Card and Contract Profiles",
+        "Employee Master Directory with Workforce Profiles and Department Taxonomy",
         "/hr/employees",
         [
-            ("Employee Directory Table", "Employee IDs, legal names, job titles, departments, visa statuses, and basic salary in AED."),
-            ("+ Add Employee Button", "Primary action trigger opening multi-tab employee registration modal."),
-            ("Department & Branch Filter", "Filter staff by Executive, Finance, Sales, Logistics, or Warehouse Branch."),
-            ("Document Expiry Alerts", "Color-coded indicators tracking expiration of Emirates IDs, Passports, and Residency Visas.")
+            ("Top Actions", "Export Employee Master and + Onboard Employee action buttons."),
+            ("Department Filters", "Filter workforce by Executive, Finance, Operations, Logistics, or Warehouse."),
+            ("Search Input", "Real-time search by employee ID, legal name, designation, or national identity."),
+            ("Workforce Grid", "Columns for Employee ID, Name, Job Title, Department, Visa/EID Expiry, Salary, Status, Actions.")
         ]
     )
     return f"""
@@ -24,107 +24,127 @@ def get_page_17():
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ HR & Workforce ➔ Employees
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ HR ➔ Employee Directory
       </div>
 
       <p>
-        The Human Resources module manages the complete employee lifecycle, workforce master profiles, statutory MOHRE employment contract details, personal UAE banking coordinates, and document expiration tracking in compliance with UAE Labour regulations.
+        The Employee Master Directory provides centralized workforce governance in Acconeer ERP. It maintains statutory employee profiles, employment contract terms, personal UAE banking coordinates, and document expiration dates in compliance with UAE Labour regulations.
       </p>
 
       {wf}
 
-      <h2>Employee Profile Data Dictionary & Mandatory Parameters</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Field Parameter</th>
-            <th style="width: 14%;">Field Type</th>
-            <th style="width: 38%;">Description & Required Format</th>
-            <th style="width: 26%;">Validation Rules</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Full Legal Name *</td>
-            <td>Text</td>
-            <td>Full name matching passport and Emirates ID.</td>
-            <td>Mandatory; minimum 3 characters.</td>
+            <td class="col-field">+ Onboard Employee</td>
+            <td>Solid Purple Button</td>
+            <td>Opens employee registration modal to record personal data, contract dates, salary, and UAE IBAN.</td>
           </tr>
           <tr>
-            <td class="col-field">Emirates ID (EID) *</td>
-            <td>Text (15 digits)</td>
-            <td>Standard UAE federal identity number (<code>784-YYYY-XXXXXXX-Z</code>).</td>
-            <td>Validated format; must be unique in organization.</td>
+            <td class="col-field">Export Master</td>
+            <td>Export Button</td>
+            <td>Exports complete workforce roster and compliance status to Excel spreadsheet or formatted PDF.</td>
           </tr>
           <tr>
-            <td class="col-field">MOHRE Labour Card *</td>
-            <td>Text (14 digits)</td>
-            <td>Ministry of Human Resources unique employee identifier.</td>
-            <td>Mandatory for Wages Protection System (WPS) routing.</td>
+            <td class="col-field">Department Filter</td>
+            <td>Dropdown Filter</td>
+            <td>Filters directory by organizational department: Management, Finance, Sales, Logistics, Engineering.</td>
           </tr>
           <tr>
-            <td class="col-field">Personal UAE IBAN *</td>
-            <td>Text (23 chars)</td>
-            <td>Employee's personal bank account registered in UAE (<code>AE...</code>).</td>
-            <td>Validated: 23 characters; matches employee legal name.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Basic Salary *</td>
-            <td>Numeric (AED)</td>
-            <td>Contractual monthly basic pay specified in MOHRE contract.</td>
-            <td>Mandatory; must be greater than zero.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Allowances (Housing/Trans)</td>
-            <td>Numeric (AED)</td>
-            <td>Itemized monthly fixed allowances for housing, transport, or food.</td>
-            <td>Summed with Basic Salary for gross payroll calculation.</td>
+            <td class="col-field">Search Input Bar</td>
+            <td>Text Field</td>
+            <td>Real-time search across employee legal names, internal staff codes, and Emirates ID numbers.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Onboarding a New Employee</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>HR & Workforce ➔ Employees</strong> and click the blue <strong>+ Add Employee</strong> button.</li>
-        <li>Enter the employee's personal details, date of birth, nationality, and 15-digit <strong>Emirates ID</strong>.</li>
-        <li>Under the Employment tab, select the assigned <strong>Department</strong> and operating <strong>Branch Cost Center</strong>.</li>
-        <li>Input the 14-digit <strong>MOHRE Labour Card Number</strong> and select the contract start and end dates.</li>
-        <li>In the Compensation tab, enter the monthly <strong>Basic Salary</strong> and breakdown of contractual allowances.</li>
-        <li>Under Bank Coordinates, enter the employee's personal 23-character <strong>UAE IBAN</strong> and bank name.</li>
-        <li>Upload scanned PDF copies of the Emirates ID, passport, and signed contract in the Documents tab, then click <strong>Save & Activate</strong>.</li>
-      </ol>
-
-      <h2>Statutory Leave Entitlements & Approval Routing</h2>
+      <h2>Employee Directory Grid Columns & Field Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Leave Classification</th>
-            <th style="width: 35%;">Statutory Accrual & Entitlement</th>
-            <th style="width: 40%;">System Approval & Payroll Impact</th>
+            <th style="width: 22%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 60%;">On-Screen Information & Operational Impact</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Annual Leave</td>
-            <td>30 calendar days per completed year of service (2.5 days/month).</td>
-            <td>Requires supervisor approval; paid at full basic salary + allowances.</td>
+            <td class="col-field">Employee ID</td>
+            <td>Sequential Code</td>
+            <td>Unique employee personnel code (e.g. <code>EMP-2026-0012</code>); links to complete personnel profile.</td>
           </tr>
           <tr>
-            <td class="col-field">Sick Leave</td>
-            <td>Up to 90 days per year (15 full pay, 30 half pay, 45 unpaid).</td>
-            <td>Medical certificate required; payroll engine auto-adjusts daily wage.</td>
+            <td class="col-field">Full Legal Name</td>
+            <td>Text (Passport Match)</td>
+            <td>Full legal name matching Emirates ID and MOHRE statutory employment contract.</td>
           </tr>
           <tr>
-            <td class="col-field">Maternity Leave</td>
-            <td>60 days (45 days full pay, 15 days half pay).</td>
-            <td>Requires HR documentation; protected under UAE Labour regulations.</td>
+            <td class="col-field">Designation & Dept</td>
+            <td>Role & Department</td>
+            <td>Corporate job title and organizational department cost-center mapping.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Visa & EID Expiry</td>
+            <td>Date & Expiry Alert</td>
+            <td>Statutory expiration dates with visual alerts when renewals are required within 30 days.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Basic Salary & IBAN</td>
+            <td>Currency & Account</td>
+            <td>Contractual basic salary in AED and verified 23-character UAE IBAN for payroll routing.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Status & Actions</td>
+            <td>Badge & Actions</td>
+            <td>Employment status (<code>Active</code>, <code>On Leave</code>) and menu triggers to Edit Profile or View Payroll.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Document Expiry Alert Windows & Compliance Status</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Expiry Window</th>
+            <th style="width: 28%;">Visual Status Indicator</th>
+            <th style="width: 50%;">Statutory Obligation & HR Action Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">&gt; 60 Days Remaining</td>
+            <td><code>Valid / Current</code> (Green)</td>
+            <td>Compliance in good standing; no immediate action needed.</td>
+          </tr>
+          <tr>
+            <td class="col-field">30 – 60 Days</td>
+            <td><code>Expiring Soon</code> (Amber)</td>
+            <td>Early reminder; initiate medical test and immigration renewal papers.</td>
+          </tr>
+          <tr>
+            <td class="col-field">&lt; 30 Days</td>
+            <td><code>Urgent Expiry</code> (Red)</td>
+            <td>Mandatory renewal trigger; dashboard alert dispatched to HR Manager.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Expired / Overdue</td>
+            <td><code>Statutory Violation</code> (Black)</td>
+            <td>Late fines apply; system blocks employee from standard WPS payroll batch.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">DOCUMENT EXPIRY MONITORING</div>
-        Acconeer ERP automatically monitors passport, residency visa, and Emirates ID expiration dates. When a document is within 30 days of expiry, the employee record displays an amber badge and notifies the HR Manager via dashboard alerts.
+        <div class="callout-title">WPS SIF COMPLIANCE VALIDATION</div>
+        All onboarded employees must have a verified 14-digit MOHRE Labour Card number and a valid 23-character UAE IBAN registered to enable automated inclusion in monthly Wages Protection System (WPS) payment batches.
       </div>
     </div>
     """
@@ -135,9 +155,9 @@ def get_page_18():
         "Monthly Payroll Processing Engine with Timesheet Locking and WPS SIF Export",
         "/hr/payroll",
         [
-            ("Payroll Batch Header", "Current payroll month (e.g. September 2026), employee head count, and gross payroll total."),
+            ("Payroll Batch Header", "Current payroll month (e.g. September 2026), head count, and gross payroll total."),
             ("Run Payroll Batch", "Primary action trigger to execute automated salary, allowance, and deduction calculations."),
-            ("WPS SIF Export Trigger", "Generates encrypted CBUAE-compliant Salary Information File (SIF v1.2) for corporate bank upload."),
+            ("WPS SIF Export Trigger", "Generates encrypted CBUAE-compliant Salary Information File for bank upload."),
             ("Post Salary Voucher", "One-click generation of balanced double-entry payroll accrual journal in General Ledger.")
         ]
     )
@@ -152,122 +172,139 @@ def get_page_18():
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ HR & Workforce ➔ Payroll & WPS
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ HR ➔ Payroll
       </div>
 
       <p>
-        The Payroll Processing Engine automates monthly compensation calculations, verifies biometric attendance timesheets, deducts statutory absences, posts balanced general ledger payroll accruals, and exports official CBUAE Wages Protection System (WPS) SIF v1.2 files.
+        The Payroll Processing Engine automates monthly compensation runs, attendance and overtime calculations, statutory UAE Wages Protection System (WPS) SIF file generation, and synchronous General Ledger wage expense postings.
       </p>
 
       {wf}
 
-      <h2>Payroll Line Component Architecture & Calculation Rules</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Payroll Component</th>
-            <th style="width: 18%;">Classification</th>
-            <th style="width: 38%;">Operational Calculation Rule</th>
-            <th style="width: 22%;">GL Posting Mapping</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Basic Wage</td>
-            <td>Earning (Fixed)</td>
-            <td>Contractual fixed basic monthly pay from employee profile.</td>
-            <td>Debit: <code>6010 Staff Salaries</code></td>
+            <td class="col-field">Run Payroll Batch</td>
+            <td>Solid Purple Button</td>
+            <td>Calculates monthly basic pay, contractual allowances, unpaid leave deductions, and net wage totals.</td>
           </tr>
           <tr>
-            <td class="col-field">Housing Allowance</td>
-            <td>Earning (Fixed)</td>
-            <td>Contractual monthly housing allowance.</td>
-            <td>Debit: <code>6020 Housing Allowance</code></td>
+            <td class="col-field">Export WPS SIF</td>
+            <td>Solid Green Button</td>
+            <td>Generates official Central Bank of UAE compliant Salary Information File (<code>.SIF</code>) for corporate bank upload.</td>
           </tr>
           <tr>
-            <td class="col-field">Transport Allowance</td>
-            <td>Earning (Fixed)</td>
-            <td>Contractual monthly travel and transport allowance.</td>
-            <td>Debit: <code>6030 Transport Expense</code></td>
+            <td class="col-field">Post Salary Journal</td>
+            <td>Solid Blue Button</td>
+            <td>Writes balanced wage accrual voucher to General Ledger: debits salary expense and credits payroll clearing.</td>
           </tr>
           <tr>
-            <td class="col-field">Unpaid Leave Deductions</td>
-            <td>Deduction</td>
-            <td>Calculated: <code>(Basic Salary / 30 Days) * Unapproved Days Absent</code>.</td>
-            <td>Credit: Offsets Salary Expense</td>
-          </tr>
-          <tr>
-            <td class="col-field">Net Salary Payable</td>
-            <td>Net Disbursement</td>
-            <td>Formula: <code>Basic + Allowances - Deductions</code>.</td>
-            <td>Credit: <code>2300 Accrued Salaries</code></td>
+            <td class="col-field">Lock Pay Period</td>
+            <td>Outline Button</td>
+            <td>Locks attendance timesheets and wage calculations, preventing further payroll modifications for that month.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Running Monthly Payroll & WPS Export</h2>
-      <ol class="step-list">
-        <li>Confirm that all employee attendance and approved leave requests are locked for the month (typically on the 25th).</li>
-        <li>Navigate to <strong>HR & Workforce ➔ Payroll & WPS</strong> and click <strong>+ Run Monthly Payroll Batch</strong>.</li>
-        <li>Select the payroll month and year, then click <strong>Calculate Payroll</strong>.</li>
-        <li>Review the pre-calculated payroll register: verify employee head count, gross payroll, and individual net pay.</li>
-        <li>Click <strong>Post Payroll to General Ledger</strong> to generate the salary accrual voucher: <em>Dr. Salary Expense (6010) / Cr. Accrued Salaries (2300)</em>.</li>
-        <li>Click the green <strong>Export WPS SIF File</strong> button. The system generates the encrypted <code>.SIF</code> file for upload to corporate banking portals (e.g. ENBD, ADCB, FAB).</li>
-      </ol>
-
-      <h2>CBUAE Wages Protection System (WPS) Validation Rules</h2>
+      <h2>Payroll Batch Summary Telemetry Cards</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">WPS File Parameter</th>
-            <th style="width: 35%;">Central Bank Format Standard</th>
-            <th style="width: 40%;">System Verification Safeguard</th>
+            <th style="width: 24%;">Telemetry Card</th>
+            <th style="width: 18%;">Display Value</th>
+            <th style="width: 58%;">Calculation Source & Operational Meaning on Screen</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Employer ID / MOL Code</td>
-            <td>13-digit corporate establishment number.</td>
-            <td>Auto-populated from Legal Entity settings; verified against MOHRE.</td>
+            <td class="col-field">GROSS PAYROLL</td>
+            <td><code>AED 0.00</code></td>
+            <td>Cumulative contractual basic salaries plus fixed housing and transport allowances across all active staff.</td>
           </tr>
           <tr>
-            <td class="col-field">Bank Routing Code</td>
-            <td>9-digit CBUAE clearing code for paying bank.</td>
-            <td>Linked to disbursing corporate bank account in Banking Master.</td>
+            <td class="col-field">TOTAL DEDUCTIONS</td>
+            <td><code>AED 0.00</code></td>
+            <td>Unpaid leave deductions, salary advances, and disciplinary withholdings calculated by the engine.</td>
           </tr>
           <tr>
-            <td class="col-field">Salary Disbursement Date</td>
-            <td>File creation date must precede payment date by &le; 14 days.</td>
-            <td>Prevents late submission penalties under Ministerial Decree No. 43.</td>
+            <td class="col-field">NET PAYABLE (WPS)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Net monetary amount disbursed to employees via corporate bank WPS routing file.</td>
+          </tr>
+          <tr>
+            <td class="col-field">WPS VALIDATION</td>
+            <td><code>100% Passed</code></td>
+            <td>Automated pre-flight check confirming all employee records hold valid MOHRE IDs and UAE IBANs.</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">WPS COMPLIANCE DEADLINE</div>
-        Under UAE Ministry of Human Resources & Emiratisation (MOHRE) regulations, private sector salaries must be transferred through an approved WPS agent within 15 days of the month-end date to maintain statutory corporate compliance.
-      </div>
+      <h2>Payroll Register Grid Columns & Actions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 60%;">On-Screen Information & Operational Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Emp ID & Name</td>
+            <td>Code & Legal Name</td>
+            <td>Personnel code and employee full name linked to HR master profile.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Basic Salary</td>
+            <td>Contract Currency</td>
+            <td>MOHRE registered contractual monthly basic wage in AED.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Fixed Allowances</td>
+            <td>Itemized Breakdown</td>
+            <td>Contractual housing, utility, and transport allowances.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Net Salary (AED)</td>
+            <td>Disbursement Total</td>
+            <td>Final net monthly pay after adding overtime and subtracting authorized deductions.</td>
+          </tr>
+          <tr>
+            <td class="col-field">WPS Status & Actions</td>
+            <td>Badge & Menu</td>
+            <td>WPS routing compliance badge and options to <em>Download Payslip (PDF)</em> or <em>Adjust Deductions</em>.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     """
 
 def get_page_19():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Reports/01_Financial_Reports.png",
-        "Financial Reports Workspace with Interactive Statements and Sub-Ledger Drill-Down",
+        "Financial Statements & Executive Reporting Suite with Analytical Ratios",
         "/reports/financials",
         [
-            ("Report Type Selector", "Select between Balance Sheet, Profit & Loss (P&L), Trial Balance, and Cash Flow Statement."),
-            ("Entity & Comparative Filter", "Filter by Legal Entity, Branch, and set comparative periods (Prior Month or Prior Year)."),
-            ("Interactive Account Tree", "Clickable account rows that expand to show sub-accounts and underlying journal vouchers."),
-            ("Export Actions Bar", "One-click export of verified financial statements to publication-grade PDF or structured Excel.")
+            ("Top Actions", "Print, Export Excel, and Export PDF action buttons."),
+            ("Reporting Period Filters", "Entity scope, quick period pills (All time, YTD, This month, Q1-Q4), and Hide zero lines toggle."),
+            ("4 Executive KPI Cards", "Top-Line Operating Revenue, EBITDA, Total Balance Sheet Assets, Accounting Equation Equilibrium."),
+            ("Report Navigation Tabs", "D3 Visual Analytics, Profit & Loss (P&L), Balance Sheet, Trial Balance, General Ledger.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">REPORTS & INTELLIGENCE · FINANCIAL STATEMENTS</div>
-          <div class="chapter-title">Financial Reports (P&L, Balance Sheet, Trial Balance)</div>
+          <div class="chapter-category">FINANCIAL INTELLIGENCE · STATUTORY REPORTS</div>
+          <div class="chapter-title">Financial Statements & Reporting Suite</div>
         </div>
         <div class="chapter-right-meta">MODULE 15<br>/reports/financials</div>
       </div>
@@ -277,100 +314,127 @@ def get_page_19():
       </div>
 
       <p>
-        The Financial Reports module delivers comprehensive statutory and managerial financial statements compliant with IFRS standards. All statements feature real-time sub-ledger drill-down, multi-currency reporting, and multi-entity consolidation.
+        The Financial Statements & Reporting Suite generates real-time statutory financial statements directly from posted General Ledger vouchers, providing interactive drilldown into account balances, period-over-period variance analysis, and multi-format exports.
       </p>
 
       {wf}
 
-      <h2>Standard Financial Reports Master Directory</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 24%;">Financial Statement</th>
-            <th style="width: 36%;">Accounting Framework & Content</th>
-            <th style="width: 40%;">Primary Operational Purpose</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Print</td>
+            <td>White Border Button</td>
+            <td>Formats active financial statement for professional physical printing or PDF printer spooling.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Export Excel</td>
+            <td>Solid Green Button</td>
+            <td>Exports active financial statement to multi-tab spreadsheet with intact formula calculations.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Export PDF</td>
+            <td>Solid Purple Button</td>
+            <td>Generates official publication-grade audited financial statement PDF document.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Period Pills</td>
+            <td>Filter Buttons</td>
+            <td>Instant period selection: <code>All time</code>, <code>YTD</code>, <code>This month</code>, <code>Q1</code>, <code>Q2</code>, <code>Q3</code>, <code>Q4</code>, <code>Custom</code>.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Hide Zero Lines</td>
+            <td>Checkbox (Checked)</td>
+            <td>Toggles suppression of inactive accounts with zero balances for clean statement presentation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>On-Screen Metric & Telemetry Cards</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 26%;">Metric Card</th>
+            <th style="width: 18%;">Display Value</th>
+            <th style="width: 56%;">Calculation Source & Operational Meaning on Screen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Top-Line Revenue</td>
+            <td><code>AED 0.00</code></td>
+            <td>Gross operational turnover from commercial sales; displays real-time <em>Gross Margin: 0.0%</em>.</td>
+          </tr>
+          <tr>
+            <td class="col-field">EBITDA</td>
+            <td><code>AED 0.00</code></td>
+            <td>Earnings before interest, taxes, depreciation, and amortization computed dynamically from GL.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Total Assets</td>
+            <td><code>AED 0.00</code></td>
+            <td>Total balance sheet carrying value across current, fixed, and liquid cash assets.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Equation Equilibrium</td>
+            <td><code>Assets = Liab + Eq</code></td>
+            <td>Green checkmark verification confirming double-entry accounting integrity holds across all ledgers.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Report Statement Tabs & Visual Analytics</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Report Tab</th>
+            <th style="width: 35%;">Statement Scope</th>
+            <th style="width: 40%;">On-Screen Analytical Content</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="col-field">Profit & Loss (P&L)</td>
-            <td>Revenue (4000), COGS (5000), and Operating Expenses (6000).</td>
-            <td>Measures commercial performance, gross margin, operating profit, and net profit for any selected period.</td>
+            <td>Revenues, COGS, Gross Profit, Operating Expenses, Net Income.</td>
+            <td>Income statement detailing operational profitability over the selected fiscal period.</td>
           </tr>
           <tr>
             <td class="col-field">Balance Sheet</td>
-            <td>Assets (1000), Liabilities (2000), and Shareholders' Equity (3000).</td>
-            <td>Presents financial position at a specific point in time; verifies <em>Assets = Liabilities + Equity</em>.</td>
+            <td>Assets (1000s), Liabilities (2000s), Shareholders' Equity (3000s).</td>
+            <td>Statement of financial position showing enterprise net worth at period close.</td>
           </tr>
           <tr>
-            <td class="col-field">Trial Balance (TB)</td>
-            <td>Complete listing of all active COA accounts with debit and credit totals.</td>
-            <td>Used by accountants for month-end reconciliation to verify that total debits equal total credits.</td>
+            <td class="col-field">Trial Balance</td>
+            <td>Complete listing of all active Chart of Accounts ledgers.</td>
+            <td>Auditor trial balance verifying Total Debits equal Total Credits across all accounts.</td>
           </tr>
           <tr>
-            <td class="col-field">Cash Flow Statement</td>
-            <td>Operating activities, investing activities, and financing activities.</td>
-            <td>Tracks actual physical cash inflows and outflows across corporate bank accounts and petty cash.</td>
+            <td class="col-field">General Ledger</td>
+            <td>Transaction book grouped by account code.</td>
+            <td>Detailed chronological journal postings supporting every balance sheet line item.</td>
           </tr>
         </tbody>
       </table>
-
-      <h2>Standard Operating Procedure: Generating and Exporting Financial Statements</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Reports ➔ Financial Statements</strong>.</li>
-        <li>In the top report bar, click the tab for the statement you require (e.g. <strong>Profit & Loss</strong>).</li>
-        <li>Select the reporting <strong>Legal Entity</strong> (or choose <em>All Entities</em> for consolidated group results).</li>
-        <li>Set the target <strong>Date Range</strong> (e.g. <em>Current Fiscal Year YTD</em> or <em>Q3 2026</em>).</li>
-        <li>Enable <strong>Comparative Period</strong> if you wish to display variance columns against the prior period or prior year.</li>
-        <li>Click directly on any account row with an underline (e.g. <code>4000 Commercial Sales</code>) to drill down into the underlying transactions.</li>
-        <li>Click <strong>Export PDF</strong> to download an official publication-grade report, or click <strong>Export Excel</strong> for data modeling.</li>
-      </ol>
-
-      <h2>Key Financial Health Indicators & Ledger Ratios</h2>
-      <table class="doc-table">
-        <thead>
-          <tr>
-            <th style="width: 25%;">Financial Health Metric</th>
-            <th style="width: 35%;">Underlying General Ledger Formula</th>
-            <th style="width: 40%;">Target Enterprise Benchmark</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-field">Current Ratio</td>
-            <td>Current Assets (1000–1400) / Current Liabilities (2000–2300)</td>
-            <td>&gt; 1.50 (Indicates healthy short-term solvency).</td>
-          </tr>
-          <tr>
-            <td class="col-field">Quick Ratio (Acid Test)</td>
-            <td>(Cash 1010 + Receivables 1200) / Current Liabilities</td>
-            <td>&gt; 1.00 (Excludes slower-moving inventory assets).</td>
-          </tr>
-          <tr>
-            <td class="col-field">Operating Profit Margin</td>
-            <td>Operating Profit (4000 - 5000 - 6000) / Total Revenue</td>
-            <td>&gt; 15.0% (Measures operational efficiency).</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="callout">
-        <div class="callout-title">CONSOLIDATION WITH INTER-COMPANY ELIMINATIONS</div>
-        When selecting <em>All Entities (Consolidated)</em>, Acconeer ERP dynamically eliminates balances between Account 1950 (Due from Affiliates) and Account 2950 (Due to Affiliates) to present a true consolidated picture to corporate directors.
-      </div>
     </div>
     """
 
 def get_page_20():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/VAT_Returns/01_VAT_Filing_Dashboard.png",
-        "UAE VAT Return (Form 201) Preparation Workspace with 7 Emirates Breakdown",
+        "UAE VAT Return (Form VAT 201) Preparation Workspace & FTA Compliance",
         "/tax/vat201",
         [
-            ("Form 201 Header", "Tax Registration Number (TRN), Tax Period (e.g. 2026-Q3), and Return Due Date."),
-            ("Box 1: Standard Rated Sales", "Mandatory breakdown of 5% commercial sales and VAT amount across all 7 Emirates."),
-            ("Box 9: Standard Rated Expenses", "Summary of input VAT incurred on local purchases and operational expenses."),
-            ("Generate EmaraTax XML", "Export official structured data file for direct submission to the UAE FTA portal.")
+            ("Top Action Buttons", "CSV, Excel, PDF, and + Create VAT Return action buttons."),
+            ("4 VAT Metric Cards", "Gross Output Tax (Box 8), Recoverable Input Tax (Box 11), Net VAT Payable (Box 14), FTA Filing Status."),
+            ("View Tabs", "VAT Returns Register (Form 201) and FTA Compliance & Tax Rates Guide tabs."),
+            ("Returns Data Grid", "8-column table tracking Return Reference, Period, Due Date, Outputs, Box 8, Box 11, Box 14, Status, Actions.")
         ]
     )
     return f"""
@@ -378,113 +442,133 @@ def get_page_20():
       <div class="chapter-header">
         <div>
           <div class="chapter-category">STATUTORY COMPLIANCE · TAXATION</div>
-          <div class="chapter-title">UAE VAT Return (Form 201) Preparation</div>
+          <div class="chapter-title">UAE VAT Return (Form VAT 201) Preparation</div>
         </div>
         <div class="chapter-right-meta">MODULE 16<br>/tax/vat201</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Statutory Tax ➔ VAT Return (Form 201)
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ VAT Returns (or <kbd>Alt + V</kbd>)
       </div>
 
       <p>
-        The VAT Return Preparation module automatically aggregates sales invoices, credit notes, supplier bills, and expense receipts into the official 14-box layout mandated by the UAE Federal Tax Authority (FTA) for quarterly Form 201 filings.
+        The VAT Returns workspace automatically aggregates commercial sales invoices, credit notes, supplier bills, and expenses into the official 14-box layout mandated by the UAE Federal Tax Authority (FTA) for quarterly Form VAT 201 declarations.
       </p>
 
       {wf}
 
-      <h2>UAE VAT Form 201 Box Classification Architecture</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 14%;">Box #</th>
-            <th style="width: 26%;">Statutory Box Description</th>
-            <th style="width: 32%;">ERP Sub-Ledger Transaction Source</th>
-            <th style="width: 28%;">Tax Rate & Calculation Basis</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Box 1</td>
-            <td>Standard Rated Supplies</td>
-            <td>Customer Sales Invoices categorized by branch Emirate.</td>
-            <td>5% VAT calculated across each of the 7 Emirates.</td>
+            <td class="col-field">+ Create VAT Return</td>
+            <td>Solid Purple Button</td>
+            <td>Initializes a new quarterly tax declaration period and scans posted ledgers for taxable supplies.</td>
           </tr>
           <tr>
-            <td class="col-field">Box 2</td>
-            <td>Tax Refunds for Tourists</td>
-            <td>Retail tax-free sales registered through Planet scheme.</td>
-            <td>Amounts refunded to tourists under statutory scheme.</td>
+            <td class="col-field">Excel & CSV</td>
+            <td>Export Buttons</td>
+            <td>Exports formatted Form 201 calculation schedule and transaction-level audit worksheets.</td>
           </tr>
           <tr>
-            <td class="col-field">Box 3</td>
-            <td>Supplies Subject to Reverse Charge</td>
-            <td>Imported services from foreign overseas suppliers.</td>
-            <td>Reverse charge accounting (Self-accounted 5%).</td>
+            <td class="col-field">PDF</td>
+            <td>Export Button</td>
+            <td>Generates official summary tax return filing report for CFO sign-off and audit archiving.</td>
           </tr>
           <tr>
-            <td class="col-field">Box 4</td>
-            <td>Zero-Rated Supplies</td>
-            <td>Direct exports of goods and international logistics.</td>
-            <td>0% VAT; requires export proof of exit attached.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Box 9</td>
-            <td>Standard Rated Expenses</td>
-            <td>Supplier bills and OpEx vouchers with verified TRNs.</td>
-            <td>5% Recoverable Input VAT credited against liability.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Box 12</td>
-            <td>Total Value of Due Tax</td>
-            <td>Net liability: <code>Total Output VAT - Recoverable Input VAT</code>.</td>
-            <td>Determines net tax payable to the FTA or refund claim.</td>
+            <td class="col-field">Status Filter</td>
+            <td>Dropdown Filter</td>
+            <td>Filters VAT return records by filing status: <code>All Statuses</code>, <code>Draft</code>, <code>Ready to File</code>, <code>Settled</code>.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Generating Quarterly VAT Return (Form 201)</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Statutory Tax ➔ VAT Return (Form 201)</strong>.</li>
-        <li>Select the operating <strong>Legal Entity</strong> and choose the target tax quarter (e.g. <em>Q3 2026: Jul 01 – Sep 30</em>).</li>
-        <li>Click <strong>Generate Return</strong>. The engine scans all posted sales and expense transactions within the date window.</li>
-        <li>Inspect <strong>Box 1</strong>: verify that sales are accurately distributed across Dubai, Abu Dhabi, Sharjah, and other Emirates.</li>
-        <li>Inspect <strong>Box 9</strong>: verify that all claimed input VAT is supported by valid vendor tax invoices with registered TRNs.</li>
-        <li>Click <strong>Export Audit File (FAF)</strong> to generate the FTA Audit File for internal compliance review.</li>
-        <li>Click the blue <strong>Download EmaraTax File</strong> button to export the finalized return for direct upload to the FTA portal.</li>
-      </ol>
-
-      <h2>Pre-Filing Tax Reconciliation & Exception Audit</h2>
+      <h2>On-Screen Metric & Telemetry Cards</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Audit Verification Step</th>
-            <th style="width: 35%;">System Reconciliation Comparison</th>
-            <th style="width: 40%;">Expected Balance & Action</th>
+            <th style="width: 26%;">Metric Card</th>
+            <th style="width: 18%;">Display Value</th>
+            <th style="width: 56%;">Calculation Source & Operational Meaning on Screen</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Revenue Alignment</td>
-            <td>Box 1 Net Supplies vs P&L Operating Revenue (4000).</td>
-            <td>Variance must equal zero or reconcile to exempt/foreign sales.</td>
+            <td class="col-field">Gross Output Tax (Box 8)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Total 5% VAT collected across standard-rated commercial sales invoices (Account 2200).</td>
           </tr>
           <tr>
-            <td class="col-field">Missing Supplier TRNs</td>
-            <td>System identifies bills claiming 5% VAT without verified TRN.</td>
-            <td>Input tax is automatically blocked until supplier TRN is provided.</td>
+            <td class="col-field">Recoverable Input (Box 11)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Total 5% VAT paid on allowable business purchases and imported supplies (Account 1300).</td>
           </tr>
           <tr>
-            <td class="col-field">Customs Import VAT</td>
-            <td>Reconcile FTA auto-populated Box 6 against Customs declarations.</td>
-            <td>Match Port/Airway bill numbers against customs import documents.</td>
+            <td class="col-field">Net VAT Payable (Box 14)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Net statutory liability payable to the FTA: <code>Box 8 minus Box 11</code> (Tax Liability Balance).</td>
+          </tr>
+          <tr>
+            <td class="col-field">FTA Filing & GL Compliance</td>
+            <td><code>0 Settled / 0 Drafts</code></td>
+            <td>Audit-grade status counter indicating finalized settlements versus active working draft returns.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>VAT Returns Register Grid Columns & Actions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 62%;">On-Screen Information & Regulatory Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Return Reference</td>
+            <td>Sequential Link</td>
+            <td>Filing reference (e.g. <code>VAT-2026-Q1</code>); clickable to open detailed Box 1-14 breakdown.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Tax Period & Due Date</td>
+            <td>Date Range & Deadline</td>
+            <td>Reporting quarter (e.g. <em>01 Jan – 31 Mar 2026</em>) and statutory submission deadline.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Outputs & Box 8</td>
+            <td>Currencies in AED</td>
+            <td>Gross commercial supplies and total 5% output tax collected on standard supplies.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Input Tax (Box 11)</td>
+            <td>Currency in AED</td>
+            <td>Total eligible input tax deducted from purchases and operational expenses.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Net Due (Box 14)</td>
+            <td>Net Liability</td>
+            <td>Final net amount due for payment to the Federal Tax Authority (or tax refund balance).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Actions</td>
+            <td>Context Menu</td>
+            <td>Menu triggers to <em>View Form 201 Matrix</em>, <em>Download FAF Audit File</em>, or <em>Post Settlement</em>.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">DRILL-DOWN TRANSACTION AUDIT</div>
-        Clicking on any figure inside Box 1 through Box 12 opens the underlying transaction list showing invoice numbers, customer names, TRNs, net taxable values, and VAT amounts for rapid pre-filing auditing.
+        <div class="callout-title">EMPTY STATE NOTIFICATION</div>
+        When no returns exist in the selected view, the workspace displays: <em>"No VAT returns found matching your filter criteria. Click 'Create VAT Return' to start a new filing."</em>
       </div>
     </div>
     """
@@ -492,109 +576,120 @@ def get_page_20():
 def get_page_21():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/focused/mod11_vat_returns.png",
-        "VAT Period Settlement Workspace with Clearing Journal and Payment Confirmation",
-        "/tax/settlement",
+        "VAT Return Form 201 Detailed Box Inspection & Settlement Workflow",
+        "/tax/vat201/detail",
         [
-            ("Settlement Period Selector", "Select target tax quarter to close, view total output liability, and input deductions."),
-            ("Net Tax Settlement Summary", "Calculates net tax payable to the FTA or net refundable tax credit in AED."),
-            ("Post Settlement Journal", "Generates balanced journal entry clearing Input and Output VAT into Net VAT Payable (2250)."),
-            ("Record Tax Payment", "Logs electronic tax payment reference (GIBAN / e-Dirham) and clears VAT Payable.")
+            ("Telemetry Cards [1]", "Gross Output Tax (Box 8), Recoverable Input (Box 11), Net VAT Payable (Box 14)."),
+            ("Regulatory Tabs [2]", "Toggle between VAT Returns Register (Form 201) and FTA Compliance Guide."),
+            ("Search & Filter [3]", "Search by reference, period, or TRN with live lifecycle status filter."),
+            ("Box-by-Box Matrix", "Detailed drilldown into standard supplies across the 7 Emirates and reverse charges.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">STATUTORY COMPLIANCE · TAXATION</div>
-          <div class="chapter-title">VAT Settlement Posting & Period Closure</div>
+          <div class="chapter-category">STATUTORY COMPLIANCE · TAX SETTLEMENT</div>
+          <div class="chapter-title">VAT Return Box Breakdown & Period Settlement</div>
         </div>
         <div class="chapter-right-meta">MODULE 17<br>/tax/settlement</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Statutory Tax ➔ VAT Settlement
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ VAT Returns ➔ Return Reference Drilldown
       </div>
 
       <p>
-        The VAT Settlement module closes the statutory tax period in the general ledger. It automates the transfer of cumulative balances from Output VAT (Account 2200) and Input VAT (Account 1250) into Net VAT Payable (Account 2250), locking the quarter against retroactive edits.
+        Clicking any return reference opens the Form VAT 201 Box Inspection interface. Acconeer ERP categorizes all underlying transactions into statutory FTA boxes and enables one-click generation of the balancing tax settlement journal voucher.
       </p>
 
       {wf}
 
-      <h2>VAT Settlement Journal Voucher Architecture</h2>
+      <h2>Form VAT 201 Box Matrix & Sub-Ledger Classification</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Accounting Step</th>
-            <th style="width: 35%;">General Ledger Account & Action</th>
-            <th style="width: 40%;">Accounting Purpose & Balancing Effect</th>
+            <th style="width: 14%;">Box Number</th>
+            <th style="width: 26%;">Statutory Declaration Name</th>
+            <th style="width: 32%;">Underlying ERP Sub-Ledger Source</th>
+            <th style="width: 28%;">Calculation & Tax Treatment</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">1. Clear Output VAT</td>
-            <td><strong>Debit Account 2200 (Output VAT)</strong></td>
-            <td>Removes cumulative 5% sales tax liability collected from clients during the quarter.</td>
+            <td class="col-field">Box 1 (a-g)</td>
+            <td>Standard Rated Supplies</td>
+            <td>Sales Invoices grouped by customer delivery Emirate.</td>
+            <td>5% VAT calculated across Abu Dhabi, Dubai, Sharjah, etc.</td>
           </tr>
           <tr>
-            <td class="col-field">2. Clear Input VAT</td>
-            <td><strong>Credit Account 1250 (Input VAT)</strong></td>
-            <td>Clears recoverable 5% purchase tax incurred on verified supplier bills.</td>
+            <td class="col-field">Box 2</td>
+            <td>Tourist Tax Refunds</td>
+            <td>Retail tax-free sales registered under Planet scheme.</td>
+            <td>Statutory tourist refund adjustments.</td>
           </tr>
           <tr>
-            <td class="col-field">3. Establish Net Liability</td>
-            <td><strong>Credit Account 2250 (Net VAT Payable)</strong></td>
-            <td>Records the net tax payable to the Federal Tax Authority (or Debit if in refund position).</td>
+            <td class="col-field">Box 3</td>
+            <td>Supplies Under Reverse Charge</td>
+            <td>Imported vendor services from international suppliers.</td>
+            <td>Self-accounted 5% RCM output and input tax.</td>
           </tr>
           <tr>
-            <td class="col-field">4. Record FTA Payment</td>
-            <td><strong>Debit 2250 / Credit 1010 (Bank Account)</strong></td>
-            <td>Clears Net VAT Payable upon electronic transfer through corporate bank GIBAN payment.</td>
+            <td class="col-field">Box 4</td>
+            <td>Zero-Rated Supplies</td>
+            <td>Commercial exports of goods outside the GCC.</td>
+            <td>0% tax; requires official customs export exit paper.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Box 9</td>
+            <td>Standard Rated Expenses</td>
+            <td>Supplier bills and expense vouchers with verified TRNs.</td>
+            <td>5% Recoverable input tax credited against liability.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Box 14</td>
+            <td>Net VAT Payable to FTA</td>
+            <td>Total Output Tax (Box 8) minus Total Input Tax (Box 11).</td>
+            <td>Final net settlement liability or refund claim.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Closing Tax Quarter & Posting Settlement</h2>
-      <ol class="step-list">
-        <li>Following successful submission of Form 201 on the FTA EmaraTax portal, open <strong>Statutory Tax ➔ VAT Settlement</strong>.</li>
-        <li>Select the closed <strong>Tax Period</strong> (e.g. <em>Q3 2026</em>). Verify that the Net Tax Payable matches the EmaraTax receipt exactly.</li>
-        <li>Click the blue <strong>Post Settlement Journal</strong> button. The system generates and posts the clearing voucher.</li>
-        <li>Once payment is remitted to the FTA via your corporate bank GIBAN, click <strong>Record Tax Payment</strong>.</li>
-        <li>Select the paying corporate <strong>Bank Account</strong>, enter the payment date, and type the official <strong>FTA Payment Reference Number</strong>.</li>
-        <li>Click <strong>Save Payment & Lock Tax Period</strong>. The system locks all transactions in Q3 against retroactive modifications.</li>
-      </ol>
-
-      <h2>Handling Tax Credits, Refunds & Voluntary Disclosures</h2>
+      <h2>VAT Period Settlement Journal Voucher Impact</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Tax Event Scenario</th>
-            <th style="width: 35%;">System Accounting Behavior</th>
-            <th style="width: 40%;">Corporate Operator Action</th>
+            <th style="width: 22%;">Accounting Entry</th>
+            <th style="width: 28%;">General Ledger Account</th>
+            <th style="width: 20%;">Debit / Credit</th>
+            <th style="width: 30%;">Operational Ledger Result</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Net Tax Refund Position</td>
-            <td>Input VAT exceeds Output VAT; Account 2250 carries Debit.</td>
-            <td>Select <em>Carry Forward to Next Period</em> or submit FTA cash refund claim.</td>
+            <td class="col-field">Clear Output VAT</td>
+            <td>Account 2200 (Output VAT Payable)</td>
+            <td>DEBIT</td>
+            <td>Zeroes out cumulative output tax collected for the quarter.</td>
           </tr>
           <tr>
-            <td class="col-field">Voluntary Disclosure (Form 211)</td>
-            <td>Error discovered in historical closed tax period (&gt; 10,000 AED).</td>
-            <td>Generate Form 211 adjustment voucher; system posts penalty accrual (6450).</td>
+            <td class="col-field">Clear Input VAT</td>
+            <td>Account 1300 (Input VAT Recoverable)</td>
+            <td>CREDIT</td>
+            <td>Zeroes out cumulative input tax paid on purchases.</td>
           </tr>
           <tr>
-            <td class="col-field">GIBAN Payment Allocation</td>
-            <td>FTA GIBAN unique virtual account number credited via wire.</td>
-            <td>Attach bank debit confirmation advice to tax payment settlement record.</td>
+            <td class="col-field">Net Settlement</td>
+            <td>Account 2210 (FTA VAT Settlement)</td>
+            <td>CREDIT</td>
+            <td>Records net statutory liability awaiting bank remittance.</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">PERIOD LOCKING SAFEGUARD</div>
-        Once a VAT settlement is posted and locked, Acconeer ERP strictly prohibits creating, editing, or deleting invoices, bills, or journals with posting dates inside that closed quarter. Any subsequent adjustments must be processed as prior-period corrections in the active open quarter.
+      <div class="callout">
+        <div class="callout-title">EMARATAX PORTAL SUBMISSION</div>
+        Click <strong>Export EmaraTax XML</strong> from the action menu to download the official structured filing file for direct upload to the UAE Federal Tax Authority portal, ensuring 100% digital alignment with your general ledger.
       </div>
     </div>
     """
@@ -602,111 +697,137 @@ def get_page_21():
 def get_page_22():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Document_Vault/01_Vault_Registry.png",
-        "Document Vault Digital Repository with Category Tagging and Expiry Alerts",
-        "/documents/vault",
+        "Company Document Repository & Enterprise Governance Vault",
+        "/vault",
         [
-            ("Document Repository Table", "Directory of archived corporate files with Document Name, Entity, Category, and Size."),
-            ("+ Upload Document", "Primary action trigger to upload digital files with metadata and access permissions."),
-            ("Category Navigation", "Filter files by Trade Licenses, Contracts, Tax Certificates, Bank Letters, and Tenancy."),
-            ("Expiry Date Tracking", "Monitors official expiration dates and flags items requiring renewal within 30 days.")
+            ("Primary Action", "+ Upload Document button to store legal, corporate, or financial files."),
+            ("Governance Tag", "ENTERPRISE KNOWLEDGE & GOVERNANCE classification banner."),
+            ("Multi-Filter Row", "Company Legal Entity, Document Category, Status, and Search Documents input bar."),
+            ("Main Repository", "Documents Repository counter and filtered display for the active legal entity.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">GOVERNANCE & ASSETS · DOCUMENT MANAGEMENT</div>
-          <div class="chapter-title">Document Vault & Digital File Management</div>
+          <div class="chapter-category">ENTERPRISE GOVERNANCE · DOCUMENT VAULT</div>
+          <div class="chapter-title">Company Document Repository & Digital Vault</div>
         </div>
-        <div class="chapter-right-meta">MODULE 18<br>/documents/vault</div>
+        <div class="chapter-right-meta">MODULE 18<br>/vault</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Document Vault (or via transaction attachments)
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Document Vault (or press <kbd>Alt + V</kbd>)
       </div>
 
       <p>
-        The Document Vault provides an encrypted, centralized digital repository for all commercial, corporate, and statutory documentation in Acconeer ERP. It links digital assets directly to financial vouchers, vendor profiles, and audit packages.
+        The Company Document Repository provides secure, audit-grade digital archiving for essential corporate records, including commercial trade licenses, tax certificates, corporate contracts, and statutory compliance documents.
       </p>
 
       {wf}
 
-      <h2>Document Categories & Access Classification Framework</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">+ Upload Document</td>
+            <td>Solid Purple Button</td>
+            <td>Opens upload modal to drag-and-drop PDF/images, tag document category, and set expiration alerts.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Company Legal Entity</td>
+            <td>Dropdown Filter</td>
+            <td>Restricts document repository view to records owned by that specific corporate operating company.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Document Category</td>
+            <td>Dropdown Filter</td>
+            <td>Filters files by class: <em>All Categories</em>, <em>Trade Licenses</em>, <em>Tax Certificates</em>, <em>Contracts</em>, <em>Leases</em>.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Search Documents</td>
+            <td>Text Field</td>
+            <td>Instant real-time search across document titles, identification numbers, issuing authority, and tags.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Document Categories & Governance Taxonomy</h2>
       <table class="doc-table">
         <thead>
           <tr>
             <th style="width: 24%;">Document Category</th>
-            <th style="width: 36%;">Representative Corporate Assets</th>
-            <th style="width: 40%;">Authorized Access Roles & Privacy Level</th>
+            <th style="width: 36%;">Typical Uploaded Records</th>
+            <th style="width: 40%;">System Monitoring & Automated Alerts</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="col-field">Corporate Licenses</td>
-            <td>Department of Economy & Tourism (DET) Commercial Licenses, MOA.</td>
-            <td>Executive, CFO, Legal Counsel (Confidential).</td>
+            <td>DED Commercial License, Chamber of Commerce, MOA.</td>
+            <td>Monitors annual renewal deadline; sends 30-day expiry notifications.</td>
           </tr>
           <tr>
-            <td class="col-field">Tax & Statutory</td>
-            <td>FTA Tax Registration Certificates, VAT Return Receipts, FAF bundles.</td>
-            <td>Finance Directors, Tax Accountants, External Auditors.</td>
+            <td class="col-field">Tax & VAT Certs</td>
+            <td>FTA Tax Registration Certificate, Corporate Tax Filing.</td>
+            <td>Linked to VAT Returns workspace for statutory audit compliance inspections.</td>
           </tr>
           <tr>
-            <td class="col-field">Commercial Contracts</td>
-            <td>Customer Master Agreements, Vendor Supply Contracts, NDAs.</td>
-            <td>Commercial Managers, Sales Directors, Procurement Staff.</td>
+            <td class="col-field">Legal Agreements</td>
+            <td>Customer master contracts, supplier agreements, NDAs.</td>
+            <td>Version-controlled archive with digital audit trail of user access.</td>
           </tr>
           <tr>
-            <td class="col-field">Banking & Treasury</td>
-            <td>Bank Mandates, Account Confirmation Letters, Board Resolutions.</td>
-            <td>Chief Financial Officer, Treasury Managers (Strict Privacy).</td>
+            <td class="col-field">Financial Audits</td>
+            <td>External auditor signed financial statements, bank mandates.</td>
+            <td>Permanent read-only archive accessible to authorized directors and auditors.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Uploading and Tagging Documents</h2>
-      <ol class="step-list">
-        <li>Navigate to the <strong>Document Vault</strong> workspace from the sidebar menu.</li>
-        <li>Click the blue <strong>+ Upload Document</strong> button located at the top-right.</li>
-        <li>Drag and drop the digital file (PDF, PNG, JPG, or XLSX) into the upload target area.</li>
-        <li>Enter a clear descriptive <strong>Document Title</strong> (e.g. <em>2026 Dubai Commercial Trade License</em>).</li>
-        <li>Select the operating <strong>Legal Entity</strong> and assign the appropriate <strong>Category</strong>.</li>
-        <li>If the document carries an official expiration date, check <strong>Set Expiry Date</strong> and select the date.</li>
-        <li>Select the <strong>Access Permission Tier</strong> to govern which user roles are permitted to view or download the file.</li>
-        <li>Click <strong>Upload & Encrypt</strong>. The file is saved with SHA-256 integrity verification.</li>
-      </ol>
-
-      <h2>Document Retention Policies & Automated Expiry Alerts</h2>
+      <h2>Retention Schedules & Cryptographic Storage Policies</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Document Classification</th>
-            <th style="width: 35%;">Statutory Retention Standard</th>
-            <th style="width: 40%;">System Notification Cadence</th>
+            <th style="width: 25%;">Record Classification</th>
+            <th style="width: 35%;">Statutory Retention Mandate</th>
+            <th style="width: 40%;">Cryptographic Security & Storage Tier</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Commercial Trade License</td>
-            <td>Renewed annually; previous versions archived permanently.</td>
-            <td>Amber alert at 60 days, 30 days, and 7 days prior to expiry.</td>
+            <td class="col-field">Corporate Charters & MOA</td>
+            <td>Permanent Enterprise Life</td>
+            <td>Immutable WORM (Write Once, Read Many) cloud object storage.</td>
           </tr>
           <tr>
-            <td class="col-field">Tax Invoices & Vouchers</td>
-            <td>Mandatory 5-year retention under UAE Federal Tax Law.</td>
-            <td>System locks deletion; files protected against accidental purge.</td>
+            <td class="col-field">VAT & Tax Documentation</td>
+            <td>7 Years (UAE FTA Law)</td>
+            <td>Encrypted AES-256 with timestamped SHA-256 access integrity hash.</td>
           </tr>
           <tr>
-            <td class="col-field">Employee Passports & Visas</td>
-            <td>Duration of employment + 2 years post-cancellation.</td>
-            <td>Automatic notification dispatched to HR Manager and employee email.</td>
+            <td class="col-field">Commercial Customer Contracts</td>
+            <td>Contract Term + 5 Years</td>
+            <td>Restricted RBAC access limited to Legal and Authorized Executive roles.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Bank Mandates & Signatures</td>
+            <td>Active Banking Lifetime</td>
+            <td>Dual-authorization access tier requiring Finance Manager credentials.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">UNIVERSAL TRANSACTION ATTACHMENTS</div>
-        Documents can also be uploaded directly inside any sales invoice, supplier bill, or manual journal entry. Files uploaded to vouchers automatically populate in the Document Vault under the respective financial category.
+        <div class="callout-title">EMPTY STATE NOTIFICATION</div>
+        When no documents match the active filters, the repository displays: <em>"No documents found — No internal documents match the active filters. Upload legal licenses, corporate certificates, and contracts for internal team reference."</em>
       </div>
     </div>
     """
@@ -714,224 +835,280 @@ def get_page_22():
 def get_page_23():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Audit_Trail/01_Security_Audit_Logs.png",
-        "System Audit Trail Register with Field-Level Change Logs and User Tracking",
-        "/audit/logs",
+        "Security Audit Trail & Real-Time User Activity Log with Live Inspector",
+        "/audit-trail",
         [
-            ("Audit Log Table", "Complete chronological log of system events: Timestamp, User, Module, Action, and IP Address."),
-            ("Action Type Filters", "Filter events by CREATE, UPDATE, POST, REVERSE, DELETE, or LOGIN_ATTEMPT."),
-            ("Field-Level Diff Viewer", "Inspect exact pre-change and post-change values for modified master records or vouchers."),
-            ("Export Audit Bundle", "Download cryptographically signed audit log extract for internal or external auditors.")
+            ("Navigation Tabs", "Access & actions (active blue button) and System events view tabs."),
+            ("Action & Filters", "Refresh button, Search user/action/path input, All categories, and All severities dropdowns."),
+            ("Left Activity Grid", "Chronological table tracking WHEN (UTC timestamp), WHO, WHERE, and ACTION."),
+            ("Right Inspector", "Real-time NAVIGATION inspector card detailing Path, User email, Role, Entity, and IP address.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">GOVERNANCE & CONTROLS · SYSTEM INTEGRITY</div>
-          <div class="chapter-title">Audit Trail Logging & Compliance Inspections</div>
+          <div class="chapter-category">SECURITY & COMPLIANCE · IMMUTABLE AUDIT LOG</div>
+          <div class="chapter-title">Security Audit Trail & User Activity Log</div>
         </div>
-        <div class="chapter-right-meta">MODULE 19<br>/audit/logs</div>
+        <div class="chapter-right-meta">MODULE 19<br>/audit-trail</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Governance & Audit ➔ Audit Trail
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Audit Trail (or press <kbd>Alt + L</kbd>)
       </div>
 
       <p>
-        The Audit Trail module provides immutable, tamper-evident logging of every user transaction, master data modification, security event, and authentication attempt in Acconeer ERP. It satisfies external auditor and statutory governance mandates.
+        The Security Audit Trail provides an immutable, real-time activity ledger recording every authenticated user action, record modification, page navigation, and system event with cryptographic precision and originating IP telemetry.
       </p>
 
       {wf}
 
-      <h2>Audit Event Classifications & Monitored Operations</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 20%;">Action Event</th>
-            <th style="width: 40%;">Monitored System Operations</th>
-            <th style="width: 40%;">Captured Metadata & Forensic Information</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">CREATE</td>
-            <td>New invoice creation, bill origination, employee onboarding, SKU setup.</td>
-            <td>User ID, timestamp, entity ID, assigned record number, initial values.</td>
+            <td class="col-field">Access & actions</td>
+            <td>Solid Blue Button</td>
+            <td>Displays user operational interactions, page navigations, and record modifications.</td>
           </tr>
           <tr>
-            <td class="col-field">UPDATE</td>
-            <td>Editing draft invoices, updating customer credit limits, modifying COA names.</td>
-            <td>Field-level diff: exact previous value versus new updated value.</td>
+            <td class="col-field">System events</td>
+            <td>Outline Tab Button</td>
+            <td>Displays backend infrastructure events, background automated sync jobs, and security alerts.</td>
           </tr>
           <tr>
-            <td class="col-field">POST</td>
-            <td>Committing draft vouchers to the general ledger; period settlements.</td>
-            <td>Voucher ID, balanced debit/credit totals, posting timestamp.</td>
+            <td class="col-field">Refresh</td>
+            <td>Solid Blue Button</td>
+            <td>Polls the immutable audit log and appends newly recorded transactions to the live view.</td>
           </tr>
           <tr>
-            <td class="col-field">REVERSE</td>
-            <td>Executing offsetting reversal of a posted journal voucher.</td>
-            <td>Original voucher ID, reason code, authorized manager ID.</td>
+            <td class="col-field">Search Input Bar</td>
+            <td>Text Field</td>
+            <td>Instant search across authenticated user emails, action codes, module tabs, and route paths.</td>
           </tr>
           <tr>
-            <td class="col-field">AUTH_EVENT</td>
-            <td>User logins, failed password attempts, multi-factor authentication (MFA).</td>
-            <td>Source IP address, browser user-agent, session ID, pass/fail result.</td>
+            <td class="col-field">Category & Severity</td>
+            <td>2 Dropdown Filters</td>
+            <td>Filters log entries by category (Navigation, Transaction, Security) and severity (INFO, WARN, CRITICAL).</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Inspecting User Actions and Exporting Audit Logs</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Governance & Audit ➔ Audit Trail</strong> (restricted to Chief Auditor & CFO).</li>
-        <li>To investigate a specific document, enter the document number (e.g. <code>INV-2026-0042</code>) in the Search Filter.</li>
-        <li>To review changes by an operator, select the <strong>User Name</strong> from the user dropdown.</li>
-        <li>Click on any log entry row to open the <strong>Detailed Change Inspector</strong> modal.</li>
-        <li>Review the side-by-side diff comparison displaying the previous value in red and the updated value in green.</li>
-        <li>To prepare records for external compliance review, click the blue <strong>Export Audit Bundle</strong> button to generate an encrypted, tamper-evident log extract.</li>
-      </ol>
-
-      <h2>Security Incident Forensics & Automated Alerts</h2>
+      <h2>Activity Log Grid & Live Inspector Fields</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Forensic Alert Trigger</th>
-            <th style="width: 35%;">Threshold Condition</th>
-            <th style="width: 40%;">Automated Escalation Action</th>
+            <th style="width: 20%;">Interface Field</th>
+            <th style="width: 26%;">On-Screen Display Example</th>
+            <th style="width: 54%;">Recorded Telemetry & Governance Value</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Repeated Failed Logins</td>
-            <td>&gt; 5 failed password attempts within 10 minutes.</td>
-            <td>Locks user account temporarily; dispatches security alert to IT Admin.</td>
+            <td class="col-field">WHEN</td>
+            <td><code>2026-11-17 17:41:00 UTC</code></td>
+            <td>High-precision coordinated universal time timestamp of the recorded action.</td>
           </tr>
           <tr>
-            <td class="col-field">High-Value Journal Posting</td>
-            <td>Manual JV exceeding AED 250,000 threshold.</td>
-            <td>Dispatches immediate notification to Chief Financial Officer email.</td>
+            <td class="col-field">WHO</td>
+            <td><code>Rondla Anvith Reddy / ORG_ADMIN</code></td>
+            <td>Full user name and assigned role authorization tier.</td>
           </tr>
           <tr>
-            <td class="col-field">Vendor Bank IBAN Alteration</td>
-            <td>Any change to supplier bank coordinates.</td>
-            <td>Freezes payment run capabilities for vendor pending dual authorization.</td>
+            <td class="col-field">WHERE</td>
+            <td><code>Banking / Audit Trail</code></td>
+            <td>ERP module workspace and sub-view where the event transpired.</td>
+          </tr>
+          <tr>
+            <td class="col-field">ACTION</td>
+            <td><code>INFO / PAGE_VIEW</code></td>
+            <td>Standardized event classification code and severity tier.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Path (Inspector)</td>
+            <td><code>/banking/audit-trail</code></td>
+            <td>Exact URL route path accessed within the web application.</td>
+          </tr>
+          <tr>
+            <td class="col-field">User & Email</td>
+            <td><code>ops1@sztech.ae</code></td>
+            <td>Verified authenticated single-sign-on corporate email address.</td>
+          </tr>
+          <tr>
+            <td class="col-field">IP Address</td>
+            <td><code>2.51.126.109</code></td>
+            <td>Originating client public network IP address for cyber forensic traceability.</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">IMMUTABLE DATABASE LOGGING</div>
-        Audit trail tables in Acconeer ERP are write-only. System administrators and database engineers cannot alter, truncate, or delete historical audit entries, ensuring absolute legal integrity for court or regulatory proceedings.
-      </div>
+      <h2>Audit Event Classification & Severity Thresholds</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Severity Code</th>
+            <th style="width: 38%;">Captured Event Type</th>
+            <th style="width: 42%;">Security & Compliance Escalation Protocol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">INFO</td>
+            <td>Routine navigation, page views, and read-only searches.</td>
+            <td>Logged permanently for compliance; zero operational alerting.</td>
+          </tr>
+          <tr>
+            <td class="col-field">WARN</td>
+            <td>Failed login attempt, permission escalation retry, draft discard.</td>
+            <td>Recorded in security telemetry; triggers review after 3 threshold events.</td>
+          </tr>
+          <tr>
+            <td class="col-field">CRITICAL</td>
+            <td>User role modification, integration API reset, period lock toggle.</td>
+            <td>Instant email alert dispatched to Organization Administrator.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     """
 
 def get_page_24():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Budgeting/01_Budgeting_Matrix.png",
-        "Departmental Budget Management Workspace with Real-Time Variance Tracking",
-        "/budgeting/master",
+        "Fiscal Budgeting & Variance Matrix with Real-Time GL Tracking",
+        "/budgeting",
         [
-            ("Budget Overview Matrix", "Annual and quarterly budgets categorized by Cost Center, Account, and Allocated Amount."),
-            ("+ Configure Budget", "Primary action trigger to establish new fiscal year departmental expenditure budgets."),
-            ("Real-Time Consumption Bar", "Visual progress bars displaying Actual Spend versus Approved Budget in AED."),
-            ("Variance Warning Indicators", "Automatic alert status: Normal (&lt;80%), Caution (80–100%), and Over-Budget (&gt;100%).")
+            ("Top Actions", "+ New Plan button and Refresh button to pull live General Ledger actuals."),
+            ("Navigation Tabs", "Budget vs. Actual Variance (active), Budget Registry (0), and Forecasts & Trends."),
+            ("Plan Setup Panel", "No Budget Plan Selected working area with prompt and + Create New Plan trigger."),
+            ("Variance Engine", "Compares budgeted allocations against posted operational expenses in real-time.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">GOVERNANCE & CONTROLS · FINANCIAL PLANNING</div>
-          <div class="chapter-title">Budgeting & Variance Alert Controls</div>
+          <div class="chapter-category">FINANCIAL PLANNING · FISCAL CONTROL</div>
+          <div class="chapter-title">Fiscal Budgeting & Variance Controls</div>
         </div>
-        <div class="chapter-right-meta">MODULE 20<br>/budgeting/master</div>
+        <div class="chapter-right-meta">MODULE 20<br>/budgeting</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Budgeting & Controls ➔ Budget Master
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Budgeting & Forecasts
       </div>
 
       <p>
-        The Budgeting module enables finance executives to configure departmental expenditure limits, track real-time consumption against allocated funds, and prevent unbudgeted purchase orders through automated approval locks.
+        The Fiscal Budgeting & Variance workspace provides financial planning governance, enabling corporate controllers to allocate departmental expenditure budgets and monitor real-time consumption against live General Ledger postings.
       </p>
 
       {wf}
 
-      <h2>Budget Threshold Escalation Tiers & Control Behavior</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Consumption Tier</th>
-            <th style="width: 18%;">Threshold Range</th>
-            <th style="width: 38%;">System Operational Behavior</th>
-            <th style="width: 22%;">Required Authorization</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Normal Operation</td>
-            <td><code>0.0% – 79.9%</code></td>
-            <td>Purchase orders and supplier bills process without restriction.</td>
-            <td>Standard Department Head</td>
+            <td class="col-field">+ New Plan</td>
+            <td>Solid Purple Button</td>
+            <td>Top-right action trigger to initialize a new annual or quarterly corporate budget matrix.</td>
           </tr>
           <tr>
-            <td class="col-field">Caution Alert</td>
-            <td><code>80.0% – 99.9%</code></td>
-            <td>System displays amber warning banner on PO creation; notifies buyer.</td>
-            <td>Finance Manager Review</td>
+            <td class="col-field">+ Create New Plan</td>
+            <td>Solid Purple Button</td>
+            <td>Central working area trigger opening the budget planning wizard to allocate account caps.</td>
           </tr>
           <tr>
-            <td class="col-field">Hard Budget Lock</td>
-            <td><code>100.0% +</code></td>
-            <td>System blocks PO submission; displays <em>"Budget Exceeded"</em> error.</td>
-            <td>Chief Financial Officer (CFO)</td>
+            <td class="col-field">Refresh Button</td>
+            <td>Circular Arrow Icon</td>
+            <td>Re-calculates actual posted expenditures from live General Ledger ledgers against budget caps.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Navigation Tabs</td>
+            <td>3 Top Tabs</td>
+            <td>Switch between <em>Budget vs. Actual Variance</em>, <em>Budget Registry</em>, and <em>Forecasts & Trends</em>.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Configuring Departmental Budgets</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Budgeting & Controls ➔ Budget Master</strong> and click <strong>+ Configure Budget</strong>.</li>
-        <li>Select the fiscal year (e.g. <em>FY 2026</em>) and the target <strong>Legal Entity</strong>.</li>
-        <li>Select the <strong>Branch Cost Center</strong> (e.g. <em>Logistics Department - Dubai</em>).</li>
-        <li>Choose the expense accounts to govern (e.g. <code>6100 Rent</code>, <code>6200 Office Supplies</code>, <code>6300 Travel</code>).</li>
-        <li>Enter the approved total annual budget and select the distribution method: <em>Equal Monthly (1/12)</em> or <em>Custom Seasonal</em>.</li>
-        <li>Set the <strong>Enforcement Rule</strong> to <em>Hard Block at 100%</em> to prevent unauthorized purchases.</li>
-        <li>Click <strong>Save & Activate Budget</strong>. Real-time spend tracking begins immediately across all linked accounts.</li>
-      </ol>
-
-      <h2>Mid-Year Budget Re-Allocations & CapEx Approval Rules</h2>
+      <h2>Budgeting Workspace Tabs & Analytical Views</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Budget Revision Action</th>
-            <th style="width: 35%;">Operational Procedure in ERP</th>
-            <th style="width: 40%;">System Governance & Audit Impact</th>
+            <th style="width: 28%;">Workspace Tab</th>
+            <th style="width: 22%;">Active Indicator</th>
+            <th style="width: 50%;">Operational Purpose & Information Displayed</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Inter-Account Transfer</td>
-            <td>Click <em>Transfer Budget</em>: move surplus travel funds to IT software.</td>
-            <td>Preserves total departmental spend; updates individual line limits.</td>
+            <td class="col-field">Budget vs. Actual</td>
+            <td>Active Lavender Tab</td>
+            <td>Side-by-side comparison of budgeted amounts versus posted actuals, displaying variance % in AED.</td>
           </tr>
           <tr>
-            <td class="col-field">Emergency Budget Supplement</td>
-            <td>Submit <em>Budget Amendment Request</em> with business justification.</td>
-            <td>Requires Board/CFO approval; logs permanent amendment history.</td>
+            <td class="col-field">Budget Registry</td>
+            <td>Badge Count (<code>0</code>)</td>
+            <td>Complete directory of approved, active, and historical corporate budget plans.</td>
           </tr>
           <tr>
-            <td class="col-field">Capital Expenditure (CapEx)</td>
-            <td>Link PO to approved Fixed Asset budget line item.</td>
-            <td>Ensures capital acquisitions do not consume operational expense funds.</td>
+            <td class="col-field">Forecasts & Trends</td>
+            <td>Trending Line Icon</td>
+            <td>Visual projection modeling future cash expenditures based on historical burn rate.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Budget Allocation Types & Spend Lock Controls</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 24%;">Allocation Method</th>
+            <th style="width: 36%;">System Enforcement Rule</th>
+            <th style="width: 40%;">Operational Alerting & Purchase Order Behavior</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Hard Budget Cap</td>
+            <td>Purchase orders blocked if budget is exceeded.</td>
+            <td>System displays red error; requires CFO authorization to override.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Soft Advisory Cap</td>
+            <td>Warns user at 80% and 100% threshold utilization.</td>
+            <td>Dispatches automated warning email to department head; allows posting.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Quarterly Rolling</td>
+            <td>Unused budget balances automatically roll over.</td>
+            <td>Re-balances Q2/Q3/Q4 caps dynamically based on quarterly performance.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Capex Project Pool</td>
+            <td>Dedicated budget allocation tied to specific Asset Tag.</td>
+            <td>Enforces capital expenditure caps for machinery and fleet acquisition.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">REAL-TIME PURCHASE ORDER VERIFICATION</div>
-        When a procurement clerk creates a purchase order, Acconeer ERP instantly checks the uncommitted budget balance. If the new order causes spend to exceed 100%, the system halts the workflow and routes the request to the CFO for special budget re-allocation.
+        <div class="callout-title">PLAN SELECTION NOTICE</div>
+        When no budget is actively loaded, the center panel displays: <em>"No Budget Plan Selected — Please create or select an active budget plan to review real-time spend variance against general ledger actuals."</em> Click <strong>+ Create New Plan</strong> to begin.
       </div>
     </div>
     """
@@ -939,109 +1116,132 @@ def get_page_24():
 def get_page_25():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/AI_Assistant/01_Spectrum_Zestwings_AI.png",
-        "AI Financial Assistant Workspace with Natural Language Querying and Draft Vouchers",
-        "/ai/assistant",
+        "Spectrum Zestwings AI Financial Assistant & Conversational Copilot",
+        "/copilot",
         [
-            ("Conversational Input Bar", "Type natural language accounting questions, variance queries, or voucher instructions."),
-            ("Prompt Suggestions Drawer", "Pre-configured financial prompts for AR Aging, P&L Analysis, and Journal Drafting."),
-            ("Interactive Response Cards", "Formatted responses with KPI callouts, comparative tables, and drill-down links."),
-            ("Review & Post Action", "One-click review and posting of AI-drafted journal vouchers with accountant verification.")
+            ("Copilot Header", "Spectrum Zestwings AI branding, Assistant badge, active legal entity scope, and window controls."),
+            ("Integration Warning", "Advisory callout noting AI credentials must be configured in Organization settings."),
+            ("Chat Greeting", "Welcome message explaining assistant capabilities: ledger analysis, tax, and planning."),
+            ("Quick Prompts", "One-click suggestion pills for tax obligations, Zoho Books sync, and comparisons.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">INTELLIGENCE & AUTOMATION · COPILOT</div>
+          <div class="chapter-category">INTELLIGENT AUTOMATION · COPILOT</div>
           <div class="chapter-title">AI Financial Assistant & Conversational Queries</div>
         </div>
-        <div class="chapter-right-meta">MODULE 21<br>/ai/assistant</div>
+        <div class="chapter-right-meta">MODULE 21<br>/copilot</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ AI Assistant (or click Sparkle icon in header)
+        <strong>NAVIGATION:</strong> Click Floating Purple AI Pill at bottom-right of any workspace
       </div>
 
       <p>
-        The AI Financial Assistant provides governed, natural language financial intelligence inside Acconeer ERP. Operators can query complex ledger balances, analyze gross margin variances, and draft journal vouchers using everyday conversational instructions.
+        The Spectrum Zestwings Financial AI Assistant is an integrated conversational copilot that queries live ledger data, explains chart of accounts mappings, suggests tax optimizations, and accelerates daily operational accounting.
       </p>
 
       {wf}
 
-      <h2>High-Value Operational Prompt Templates</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 24%;">Operational Intent</th>
-            <th style="width: 44%;">Sample Natural Language Prompt</th>
-            <th style="width: 32%;">Generated System Output</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Receivables Analysis</td>
-            <td><code>"Show me all customer invoices overdue by more than 30 days in Dubai."</code></td>
-            <td>Filtered AR aging table with customer names, contact info, and total overdue in AED.</td>
+            <td class="col-field">Floating AI Pill</td>
+            <td>Purple Circle (AI)</td>
+            <td>Persistent floating button at viewport bottom-right; toggles the conversational assistant drawer.</td>
           </tr>
           <tr>
-            <td class="col-field">Margin Performance</td>
-            <td><code>"What was our gross margin variance between Q2 and Q3 for Electronics?"</code></td>
-            <td>Comparative revenue, COGS, and margin breakdown with key variance drivers.</td>
+            <td class="col-field">Window Controls</td>
+            <td>Top-Right Icons</td>
+            <td>Trash can (clears conversation history), Maximize/Expand icon, and Close (X) button.</td>
           </tr>
           <tr>
-            <td class="col-field">Voucher Drafting</td>
-            <td><code>"Draft a monthly prepayment amortization voucher for office rent of 15,000 AED."</code></td>
-            <td>Balanced draft journal entry: Dr. Rent Expense 6100 / Cr. Prepaid Rent 1300.</td>
+            <td class="col-field">Ask Assistant...</td>
+            <td>Text Input Bar</td>
+            <td>Natural language input bar to submit accounting questions, queries, or command instructions.</td>
           </tr>
           <tr>
-            <td class="col-field">Tax Inquiries</td>
-            <td><code>"Summarize our current Q3 VAT liability and list any bills missing TRNs."</code></td>
-            <td>Box 1–12 tax estimation and list of potential input VAT exception bills.</td>
+            <td class="col-field">Send Button</td>
+            <td>Purple Paper Plane</td>
+            <td>Dispatches user query to the AI engine for real-time ledger analysis and natural language response.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Using the AI Copilot to Draft a Journal Entry</h2>
-      <ol class="step-list">
-        <li>Click the <strong>AI Assistant</strong> icon in the universal top toolbar.</li>
-        <li>Type your natural language request in the prompt input field (e.g. <em>"Draft an accrual of 12,500 AED for warehouse utilities for September"</em>).</li>
-        <li>The AI Assistant analyzes your Chart of Accounts, determines the appropriate accounts (e.g. <code>6150 Utilities</code> and <code>2350 Accrued Utilities</code>), and constructs the voucher.</li>
-        <li>Review the drafted entry in the verification card: inspect accounts, debit/credit balancing, and description narrative.</li>
-        <li>Click <strong>Open in Journal Entry Modal</strong>. The accountant reviews the lines and makes any required adjustments.</li>
-        <li>Attach supporting vendor utility bill and click <strong>Post Voucher</strong> to commit the entry to the general ledger.</li>
-      </ol>
-
-      <h2>Accountant Verification Checklist & Privacy Safeguards</h2>
+      <h2>Quick Suggestion Pills & Conversational Shortcuts</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Verification Check</th>
-            <th style="width: 35%;">Human-in-the-Loop Audit Requirement</th>
-            <th style="width: 40%;">Privacy & Security Standard</th>
+            <th style="width: 32%;">Quick Prompt Pill</th>
+            <th style="width: 28%;">Pre-Configured Intent</th>
+            <th style="width: 40%;">Information Returned by Assistant</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Account Number Accuracy</td>
-            <td>Confirm generated accounts exist and belong to active posting tree.</td>
-            <td>Zero Model Training: financial prompts never train global public models.</td>
+            <td class="col-field">Analyze current tax obligations</td>
+            <td>VAT & Tax Audit</td>
+            <td>Calculates Box 8 output tax vs Box 11 input tax and projects current net payable balance.</td>
           </tr>
           <tr>
-            <td class="col-field">Debit / Credit Equality</td>
-            <td>Verify total debits exactly match total credits (AED 0.00 difference).</td>
-            <td>Inference Enclave: data processed inside isolated VPC in UAE region.</td>
+            <td class="col-field">Summarize recent Zoho Books sync</td>
+            <td>External Integration Audit</td>
+            <td>Summarizes recently imported journal entries, customer invoices, and sync exceptions.</td>
           </tr>
           <tr>
-            <td class="col-field">Tax Rate Conformity</td>
-            <td>Confirm 5% Standard Rate is applied to applicable commercial items.</td>
-            <td>Ephemeral Execution: conversation queries discarded immediately after delivery.</td>
+            <td class="col-field">Compare multi-period P&L</td>
+            <td>Variance Analysis</td>
+            <td>Analyzes revenue and expense changes between current quarter and prior quarter.</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">HUMAN-IN-THE-LOOP GOVERNANCE</div>
-        The AI Financial Assistant cannot directly post transactions to the general ledger. All AI-generated vouchers remain in draft state until an authorized accountant performs human review and executes the final posting.
+      <h2>AI Integration Credentials & Architecture Parameters</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 24%;">Configuration Field</th>
+            <th style="width: 36%;">Setup Parameter Location</th>
+            <th style="width: 40%;">Operational Functionality & Security Boundary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">AI Model Provider</td>
+            <td>Organization ➔ Integrations ➔ AI Model</td>
+            <td>Select enterprise model provider (e.g. Gemini 1.5 Pro, Claude 3.5 Sonnet).</td>
+          </tr>
+          <tr>
+            <td class="col-field">API Key Secret</td>
+            <td>Encrypted Vault Storage</td>
+            <td>Client-side KMS encrypted key; never exposed in client browser network calls.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Context Memory Window</td>
+            <td>Active Session Cache</td>
+            <td>Maintains conversational memory across active queries within that login session.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Ledger Access Scope</td>
+            <td>RBAC Role Authorization</td>
+            <td>AI responses strictly adhere to user role; cannot reveal unauthorized data.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <div class="callout-title">CONFIGURATION ADVISORY BANNER</div>
+        If AI credentials have not been configured for the active company, the drawer displays: <em>"AI is currently disabled for Anson Enterprises Legal Entity LLC. Please configure custom keys in Organization > Company Integrations > AI Model & Credentials."</em>
       </div>
     </div>
     """
@@ -1051,194 +1251,188 @@ def get_page_26():
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">SYSTEM APPENDIX · SUPPORT & GOVERNANCE</div>
+          <div class="chapter-category">ENTERPRISE GOVERNANCE · SYSTEM SECURITY</div>
           <div class="chapter-title">System Administration & Technical Support SLAs</div>
         </div>
-        <div class="chapter-right-meta">APPENDIX<br>SUPPORT DIRECTORY</div>
+        <div class="chapter-right-meta">SECTION 22<br>ADMIN & SUPPORT</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Universal Header ➔ Help Center ➔ Enterprise Support Directory
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Manage Organization ➔ System Settings
       </div>
 
       <p>
-        Acconeer ERP is maintained under enterprise service level agreements (SLAs) guaranteed by Spectrum Zestwings Technologies LLC. This chapter details user access management, system technical requirements, and incident escalation procedures.
+        Acconeer ERP enforces enterprise governance standards covering role-based access control (RBAC), multi-factor authentication (MFA), automated database backup policies, and guaranteed commercial support response levels.
       </p>
 
-      <h2>Document Revision History & Quality Approvals</h2>
+      <h2>Role-Based Access Control (RBAC) Security Matrix</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 14%;">Revision #</th>
-            <th style="width: 18%;">Release Date</th>
-            <th style="width: 32%;">Scope of Documentation Updates</th>
-            <th style="width: 20%;">Approved By</th>
-            <th style="width: 16%;">Status</th>
+            <th style="width: 22%;">System Role</th>
+            <th style="width: 38%;">Authorized Operational Scope</th>
+            <th style="width: 40%;">Enforced Interface Restrictions</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><code>v1.0.0</code></td>
-            <td>15 Jan 2026</td>
-            <td>Initial production baseline release for UAE commercial enterprise market.</td>
-            <td>Technology Director</td>
-            <td>Archived</td>
+            <td class="col-field">ORG_ADMIN</td>
+            <td>Full system governance, user provisioning, integration setup.</td>
+            <td>Unrestricted access across all legal entities and modules.</td>
           </tr>
           <tr>
-            <td><code>v2.0.0</code></td>
-            <td>01 Jul 2026</td>
-            <td>Multi-Entity Architecture, WPS SIF export, and AI Assistant operations.</td>
-            <td>Lead Systems Architect</td>
-            <td>Archived</td>
+            <td class="col-field">FINANCE_MANAGER</td>
+            <td>General Ledger posting, VAT filing, bank reconciliation, budgets.</td>
+            <td>Restricted from user account creation and integration API keys.</td>
           </tr>
           <tr>
-            <td><code>v3.0.0</code></td>
-            <td>18 Nov 2026</td>
-            <td>Volume I: Universal Enterprise Standard Operations Manual.</td>
-            <td>Documentation Board</td>
-            <td><strong>Production</strong></td>
+            <td class="col-field">BILLING_OPERATOR</td>
+            <td>Customer invoicing, delivery notes, customer receipts.</td>
+            <td>Cannot access General Ledger journal entries or tax settings.</td>
+          </tr>
+          <tr>
+            <td class="col-field">AUDITOR</td>
+            <td>Read-only access across all financial registers, reports, audit logs.</td>
+            <td>Zero edit or posting permissions; export capabilities enabled.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Technical Environment Prerequisites & System Requirements</h2>
+      <h2>Enterprise Technical Support Channels & SLA Response Times</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">System Dimension</th>
-            <th style="width: 35%;">Supported Enterprise Standard</th>
-            <th style="width: 40%;">Operational Recommendation</th>
+            <th style="width: 22%;">Severity Level</th>
+            <th style="width: 38%;">Operational Incident Definition</th>
+            <th style="width: 20%;">Target Response</th>
+            <th style="width: 20%;">Target Resolution</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Supported Web Browsers</td>
-            <td>Google Chrome, Microsoft Edge, Mozilla Firefox, Safari</td>
-            <td>Current release and prior two major versions; JavaScript enabled.</td>
+            <td class="col-field">Critical (Sev-1)</td>
+            <td>System outage, core database unreachable, ledger posting blocked.</td>
+            <td>&lt; 30 Minutes</td>
+            <td>&lt; 4 Hours</td>
           </tr>
           <tr>
-            <td class="col-field">Display Resolution</td>
-            <td>1920 &times; 1080 (Full HD) recommended</td>
-            <td>Minimum: 1366 &times; 768. Multi-column financial tables optimized for 1080p+.</td>
+            <td class="col-field">High (Sev-2)</td>
+            <td>VAT return calculation error, bank file export failure.</td>
+            <td>&lt; 2 Hours</td>
+            <td>&lt; 12 Hours</td>
           </tr>
           <tr>
-            <td class="col-field">Network Bandwidth</td>
-            <td>Minimum 2.0 Mbps dedicated per concurrent operator</td>
-            <td>HTTPS TLS 1.3 encrypted connection; latency &lt; 50ms to UAE cloud region.</td>
+            <td class="col-field">Medium (Sev-3)</td>
+            <td>Individual user login issues, report formatting inquiry.</td>
+            <td>&lt; 4 Hours</td>
+            <td>&lt; 24 Hours</td>
+          </tr>
+          <tr>
+            <td class="col-field">Low (Sev-4)</td>
+            <td>Feature requests, general UI configuration guidance.</td>
+            <td>&lt; 8 Hours</td>
+            <td>&lt; 48 Hours</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Enterprise Technical Support Escalation Tiers</h2>
+      <h2>User Security Policies & Session Governance Standards</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Support Tier Level</th>
-            <th style="width: 38%;">Scope of Incident Management</th>
-            <th style="width: 20%;">Direct Contact Channel</th>
-            <th style="width: 20%;">Target Response SLA</th>
+            <th style="width: 25%;">Security Standard</th>
+            <th style="width: 35%;">System Architectural Rule</th>
+            <th style="width: 40%;">Operational Compliance Result</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Tier 1: Frontline Helpdesk</td>
-            <td>User login issues, password resets, role assignment, navigation assistance.</td>
+            <td class="col-field">Password Complexity</td>
+            <td>Minimum 12 characters; alphanumeric + special symbols.</td>
+            <td>Enforced during onboarding; mandatory 90-day password rotation.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Session Inactivity Lock</td>
+            <td>Auto-locks screen after 15 minutes of inactivity.</td>
+            <td>Protects unattended terminals; re-prompt for master credentials.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Multi-Factor Auth (MFA)</td>
+            <td>Mandatory TOTP authenticator app verification.</td>
+            <td>Required for all Admin and Finance Manager operational logins.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Audit Trail Immutability</td>
+            <td>WORM storage; cryptographic hash on every record.</td>
+            <td>Prevents retroactive alteration of user logs or system actions.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Automated Backup Policies & Disaster Recovery Objectives</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Recovery Dimension</th>
+            <th style="width: 35%;">Backup Schedule & Architecture</th>
+            <th style="width: 40%;">Enterprise Target Commitment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Snapshot Frequency</td>
+            <td>Continuous write-ahead logging (WAL) + hourly snapshots.</td>
+            <td>Recovery Point Objective (RPO) &lt; 5 Minutes.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Disaster Recovery (DR)</td>
+            <td>Multi-region geo-redundant database replication.</td>
+            <td>Recovery Time Objective (RTO) &lt; 1 Hour.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Support Email Desk</td>
             <td><code>support@sztech.ae</code></td>
-            <td>&lt; 2 Business Hours</td>
-          </tr>
-          <tr>
-            <td class="col-field">Tier 2: Financial Systems</td>
-            <td>GL balancing inquiries, VAT Form 201 mapping, WPS SIF export file validation.</td>
-            <td><code>finance-support@sztech.ae</code></td>
-            <td>&lt; 1 Hour (Priority)</td>
-          </tr>
-          <tr>
-            <td class="col-field">Tier 3: Cloud Operations</td>
-            <td>System availability, database failover, security events, disaster recovery.</td>
-            <td><code>ops@sztech.ae</code></td>
-            <td>&lt; 15 Minutes (24/7/365)</td>
+            <td>24/7/365 Continuous Enterprise Monitoring.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Incident Severity Classification & Response Cadence</h2>
-      <div class="grid-2col">
-        <div>
-          <h3>Severity 1: Critical (System Outage)</h3>
-          <p>
-            Core application inaccessible or unable to process transactions. Response within <strong>15 minutes</strong> with 24/7 executive bridge and continuous engineering engagement.
-          </p>
-        </div>
-        <div>
-          <h3>Severity 2: High (Feature Degraded)</h3>
-          <p>
-            Key operational capability impacted (e.g. VAT export or WPS payroll) without immediate workaround. Response within <strong>1 hour</strong> during standard business hours.
-          </p>
-        </div>
-      </div>
-
-      <h2>Disaster Recovery, Automated Backups & System Continuity</h2>
+      <h2>Statutory Audit Readiness & Financial Compliance Standards</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Continuity Element</th>
-            <th style="width: 35%;">Architecture Specification</th>
-            <th style="width: 40%;">Operational Guarantee</th>
+            <th style="width: 25%;">Regulatory Framework</th>
+            <th style="width: 35%;">Compliance Mandate & Law</th>
+            <th style="width: 40%;">System Governance Verification</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Automated Database Backups</td>
-            <td>Continuous write-ahead log (WAL) archiving + daily snapshots.</td>
-            <td>Point-in-time recovery (PITR) with maximum 15-minute RPO.</td>
+            <td class="col-field">UAE FTA Tax Compliance</td>
+            <td>Federal Decree-Law No. 8 on Value Added Tax</td>
+            <td>Generates official FTA Audit Files (FAF) with full transaction line tracing.</td>
           </tr>
           <tr>
-            <td class="col-field">Multi-Region Redundancy</td>
-            <td>Active-passive replication across UAE cloud data centers.</td>
-            <td>Automated failover execution with target RTO &lt; 30 minutes.</td>
+            <td class="col-field">IFRS Accounting Standard</td>
+            <td>International Financial Reporting Standards</td>
+            <td>Enforces double-entry balance constraints and strict sub-ledger reconciliation.</td>
           </tr>
           <tr>
-            <td class="col-field">Data Encryption at Rest</td>
-            <td>AES-256 encrypted database volumes and digital vault storage.</td>
-            <td>In-country UAE residency; compliant with Federal Law No. 47.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Scheduled Maintenance Windows & Infrastructure Monitoring</h2>
-      <table class="doc-table">
-        <thead>
-          <tr>
-            <th style="width: 25%;">Service Dimension</th>
-            <th style="width: 35%;">Standard Operating Schedule</th>
-            <th style="width: 40%;">Customer Communication Channel</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-field">Routine Maintenance</td>
-            <td>Saturdays 02:00 – 04:00 GST (bi-weekly patch window).</td>
-            <td>Advanced notification banner posted in ERP header 48 hours prior.</td>
+            <td class="col-field">MOHRE Wage Protection</td>
+            <td>Wages Protection System (WPS) Ministerial Decree</td>
+            <td>Validates automated CBUAE SIF routing and employee bank coordinates.</td>
           </tr>
           <tr>
-            <td class="col-field">Real-Time Status Portal</td>
-            <td>Continuous telemetry at <code>status.sztech.ae</code>.</td>
-            <td>Live incident dashboard tracking API, database, and background jobs.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Backup Verification</td>
-            <td>Automated daily test restoration in isolated sandbox.</td>
-            <td>Quarterly disaster recovery audit report provided to enterprise clients.</td>
+            <td class="col-field">Sovereign Cloud Data</td>
+            <td>UAE Cloud Data Residency Standards</td>
+            <td>Encrypted AES-256 cloud storage hosted within compliant regional facilities.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">SPECTRUM ZESTWINGS TECHNOLOGIES LLC — ENTERPRISE ASSURANCE</div>
-        For corporate inquiries, custom addenda, or on-site operational training, contact the Enterprise Support Desk at <code>support@sztech.ae</code> or visit the developer portal at <code>www.sztech.ae</code>.
+        <div class="callout-title">ENTERPRISE SLA GUARANTEE</div>
+        All Acconeer ERP database instances are continuously backed up with point-in-time recovery (PITR) and replicated across multi-region secure cloud infrastructure with 99.95% guaranteed uptime SLA.
       </div>
     </div>
     """
-
-if __name__ == "__main__":
-    print("Pages 17-26 module updated successfully.")

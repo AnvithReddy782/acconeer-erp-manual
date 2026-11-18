@@ -4,13 +4,13 @@ from generate_complete_manual import window_frame
 def get_page_09():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Customer_Activity/03_Sales_Order.png",
-        "Sales Order Management Pipeline with Fulfillment and Payment Status",
+        "Commercial Sales Order Register with Customer Fulfillment Tracking",
         "/customers/orders",
         [
-            ("Order Pipeline View", "Tracks order lifecycle from confirmed quotation to ready-for-delivery."),
-            ("Convert Action Trigger", "One-click conversion to physical Delivery Note or commercial Tax Invoice."),
-            ("Credit Limit Monitor", "Real-time verification of customer outstanding receivables against approved limits."),
-            ("Fulfillment Status", "Visual status badge showing Pending, In-Transit, Delivered, or Invoiced.")
+            ("Action Trigger", "+ New sales order button to initiate a verified customer order."),
+            ("Search & Filter", "Search bar for order #, customer, or PO, plus ALL status dropdown filter."),
+            ("6-Column Grid", "Order, Customer, Date, Status, Total, and Actions columns."),
+            ("Order Lifecycle", "Real-time tracking of order fulfillment prior to delivery and invoice posting.")
         ]
     )
     return f"""
@@ -18,100 +18,133 @@ def get_page_09():
       <div class="chapter-header">
         <div>
           <div class="chapter-category">COMMERCIAL & CASH · ORDER-TO-CASH</div>
-          <div class="chapter-title">Sales Orders & Customer Payment Receipts</div>
+          <div class="chapter-title">Sales Orders & Customer Order Management</div>
         </div>
         <div class="chapter-right-meta">MODULE 05<br>/customers/orders</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Customer Activity ➔ Sales Orders (or press <kbd>Alt + S</kbd>)
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Customer Activity ➔ Sales Order (or <kbd>Alt + S</kbd>)
       </div>
 
       <p>
-        The Order-to-Cash (O2C) module manages customer quotations, sales orders, warehouse delivery fulfillment, and customer payment receipts. Acconeer ERP connects each stage to maintain strict credit limits and synchronized stock allocations.
+        The Sales Order interface manages confirmed commercial sales orders placed by customers. Booking an order reserves inventory quantities, checks customer credit availability, and establishes the source record for delivery fulfillment and billing.
       </p>
 
       {wf}
 
-      <h2>Order-to-Cash Workflow Stages & Ledger Impact</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Workflow Stage</th>
-            <th style="width: 38%;">Operational Action in Acconeer ERP</th>
-            <th style="width: 40%;">Accounting & Inventory Effect</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Sales Quotation</td>
-            <td>Draft commercial price quotation sent to client.</td>
-            <td>No GL impact; holds agreed line pricing and expiry date.</td>
+            <td class="col-field">+ New sales order</td>
+            <td>Solid Purple Button</td>
+            <td>Opens order creation form to select customer, delivery date, currency, line items, and pricing.</td>
           </tr>
           <tr>
-            <td class="col-field">Sales Order</td>
-            <td>Confirmed client order; locks inventory stock.</td>
-            <td>Reserves warehouse inventory quantity; checks credit limit.</td>
+            <td class="col-field">Search Input Bar</td>
+            <td>Text Field</td>
+            <td>Instant real-time search across sales order numbers, customer names, and customer purchase orders.</td>
           </tr>
           <tr>
-            <td class="col-field">Delivery Note (DN)</td>
-            <td>Warehouse dispatch and customer delivery handover.</td>
-            <td>Relieves inventory: <code>Dr. COGS 5000 / Cr. Inventory 1400</code>.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Tax Invoice</td>
-            <td>Commercial billing; generates invoice PDF and TRN record.</td>
-            <td>Records receivable: <code>Dr. AR 1200 / Cr. Sales 4000 / Cr. VAT 2200</code>.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Customer Receipt</td>
-            <td>Bank payment receipt or check clearing allocated to invoice.</td>
-            <td>Clears receivable: <code>Dr. Bank 1010 / Cr. AR 1200</code>.</td>
+            <td class="col-field">Status Filter Dropdown</td>
+            <td>Selection Menu</td>
+            <td>Filters order table by status: <code>ALL</code>, <code>Draft</code>, <code>Confirmed</code>, <code>Shipped</code>, <code>Billed</code>, or <code>Cancelled</code>.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Creating a Sales Order & Converting to Invoice</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Customer Activity ➔ Sales Orders</strong> (<kbd>Alt + S</kbd>) and click <strong>+ New Order</strong>.</li>
-        <li>Select the <strong>Customer Name</strong>. Verify that credit limit status indicates <code>APPROVED</code>.</li>
-        <li>Add the requested catalog items, quantities, and agreed unit selling prices.</li>
-        <li>Click <strong>Confirm Order</strong>. The system reserves physical warehouse stock and updates order status to <code>CONFIRMED</code>.</li>
-        <li>When goods are ready for delivery, click <strong>Create Delivery Note</strong> to print the warehouse dispatch slip.</li>
-        <li>Once delivery is acknowledged by the customer, click <strong>Convert to Invoice</strong>. The system populates all line items into a draft tax invoice for immediate posting.</li>
-      </ol>
-
-      <h2>Customer Credit Limits & Partial Fulfillment Protocols</h2>
+      <h2>Data Grid Columns & Field Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Operational Scenario</th>
-            <th style="width: 35%;">System Control Behavior</th>
-            <th style="width: 40%;">Authorized Operator Action</th>
+            <th style="width: 18%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 64%;">On-Screen Information & Operational Impact</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Credit Limit Exceeded</td>
-            <td>System halts confirmation if order total exceeds approved credit.</td>
-            <td>Request Finance Manager temporary override or record advance receipt.</td>
+            <td class="col-field">Order</td>
+            <td>Sequential Link</td>
+            <td>Unique sales order identifier (e.g. <code>SO-2026-0001</code>); clickable to view ordered items and terms.</td>
           </tr>
           <tr>
-            <td class="col-field">Partial Stock Delivery</td>
-            <td>Warehouse issues partial Delivery Note for available inventory.</td>
-            <td>System maintains remaining balance as backorder for subsequent delivery.</td>
+            <td class="col-field">Customer</td>
+            <td>Account Name</td>
+            <td>Registered commercial counterparty name linked to Customer Directory.</td>
           </tr>
           <tr>
-            <td class="col-field">Direct Receipt Allocation</td>
-            <td>Customer payment allocated across multiple open invoices.</td>
-            <td>Navigate to <em>Receipts</em>; select FIFO or manual line item clearing.</td>
+            <td class="col-field">Date</td>
+            <td>Date Stamp</td>
+            <td>Order confirmation date defining contract commitment point.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Status</td>
+            <td>Badge</td>
+            <td>Fulfillment stage indicator (e.g. <code>Open</code>, <code>In Production</code>, <code>Fulfilled</code>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Total</td>
+            <td>Currency Amount</td>
+            <td>Committed commercial value in AED inclusive of calculated taxes.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Actions</td>
+            <td>Context Menu</td>
+            <td>Menu triggers to <em>Convert to Delivery Note</em>, <em>Generate Sales Invoice</em>, or <em>Print Order</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Order Fulfillment Lifecycle Badges & System Transitions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Status Badge</th>
+            <th style="width: 38%;">Operational Fulfillment State</th>
+            <th style="width: 40%;">Inventory & Commercial System Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Draft</td>
+            <td>Sales quote or preliminary booking in progress.</td>
+            <td>Prices editable; inventory is not yet allocated or reserved.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Confirmed</td>
+            <td>Customer purchase authorization verified.</td>
+            <td>Locks required SKU stock quantities in warehouse inventory.</td>
+          </tr>
+          <tr>
+            <td class="col-field">In Production</td>
+            <td>Warehouse picking and staging underway.</td>
+            <td>Generates dispatch manifest; triggers warehouse staff packing list.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Shipped</td>
+            <td>Goods physically dispatched from dock.</td>
+            <td>Generates Delivery Note; relieves stock from Inventory Asset (1400).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Billed</td>
+            <td>Final commercial tax invoice generated.</td>
+            <td>Posts revenue to Account 4000 and customer debt to Account 1200.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">RECORDING CUSTOMER PAYMENT RECEIPTS</div>
-        To record incoming customer payments, navigate to <strong>Customer Activity ➔ Receipts</strong>, select the client, enter the bank reference, and allocate the funds across open invoices using FIFO or manual item selection.
+        <div class="callout-title">EMPTY STATE NOTIFICATION</div>
+        When no orders exist for the active legal entity, the grid displays: <em>"No sales orders yet."</em> Click the purple <strong>+ New sales order</strong> button to book your first commercial customer order.
       </div>
     </div>
     """
@@ -119,13 +152,13 @@ def get_page_09():
 def get_page_10():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Supplier_Activity/03_Bills.png",
-        "Supplier Bills Register with 3-Way Matching and Accounts Payable Aging",
-        "/suppliers/bills",
+        "Supplier Purchase Bills Register with AI OCR Scan and AP Status",
+        "/bills",
         [
-            ("Bills Register Table", "Overview of vendor invoices with Bill #, Supplier, Date, Due Date, and Total."),
-            ("+ Enter Bill Button", "Primary action trigger to log a new vendor invoice against open purchase orders."),
-            ("3-Way Match Verification", "Automated tolerance check comparing PO quantity/price against GRN and Bill."),
-            ("Approval Status Pills", "Status indicators displaying Draft, Pending Approval, Approved, or Paid.")
+            ("Action Bar", "Upload & OCR Scan and + New Purchase Bill action buttons."),
+            ("4 Metric Cards", "Total Receivables (AR), Total Payables (AP), Sales Invoiced, and OCR & GL Automated."),
+            ("Search & Export", "Multi-attribute text search bar, All Statuses dropdown, and Excel/PDF export buttons."),
+            ("Payables Data Grid", "8-column table tracking Bill #, Type, Supplier, Dates, Total Amount, GL Status, Status, Actions.")
         ]
     )
     return f"""
@@ -133,91 +166,128 @@ def get_page_10():
       <div class="chapter-header">
         <div>
           <div class="chapter-category">COMMERCIAL & CASH · PROCURE-TO-PAY</div>
-          <div class="chapter-title">Supplier Bills & 3-Way Procure-to-Pay Matching</div>
+          <div class="chapter-title">Supplier Bills & Accounts Payable (AP)</div>
         </div>
-        <div class="chapter-right-meta">MODULE 06<br>/suppliers/bills</div>
+        <div class="chapter-right-meta">MODULE 06<br>/bills</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Supplier Activity ➔ Bills (or press <kbd>Alt + P</kbd>)
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Supplier Activity ➔ Bills (or <kbd>Alt + P</kbd>)
       </div>
 
       <p>
-        The Supplier Bills module manages vendor liability recording, automated 3-way matching, invoice approval workflows, and accounts payable (AP) aging. It safeguards corporate disbursements by verifying invoice details against verified purchase orders and receiving notes.
+        The Supplier Bills workspace manages accounts payable liabilities, vendor tax invoice processing, automated AI OCR document ingestion, and synchronous double-entry General Ledger voucher posting.
       </p>
 
       {wf}
 
-      <h2>The Automated 3-Way Match Verification Protocol</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Comparison Pillar</th>
-            <th style="width: 35%;">Source Document Reference</th>
-            <th style="width: 40%;">System Verification & Tolerance Rule</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Purchase Order (PO)</td>
-            <td>Authorized procurement order and agreed unit prices.</td>
-            <td>Billed unit price must match approved PO line price exactly (0.00% variance).</td>
+            <td class="col-field">+ New Purchase Bill</td>
+            <td>White Border Button</td>
+            <td>Opens manual bill entry form to select vendor, enter vendor invoice number, line items, and tax.</td>
           </tr>
           <tr>
-            <td class="col-field">Goods Received Note</td>
-            <td>Physical warehouse inspection count and accepted quantity.</td>
-            <td>Billed quantity cannot exceed total accepted items on linked GRN.</td>
+            <td class="col-field">Upload & OCR Scan</td>
+            <td>Solid Purple Button</td>
+            <td>Triggers AI optical character recognition to upload scanned PDFs/receipts and auto-extract billing data.</td>
           </tr>
           <tr>
-            <td class="col-field">Supplier Bill Invoice</td>
-            <td>Official tax invoice delivered by the vendor.</td>
-            <td>Supplier TRN and tax calculation must match FTA 5% VAT rules.</td>
+            <td class="col-field">Excel & PDF</td>
+            <td>Export Buttons</td>
+            <td>Downloads current filtered payables register directly to spreadsheet or formatted PDF document.</td>
+          </tr>
+          <tr>
+            <td class="col-field">All Statuses</td>
+            <td>Dropdown Filter</td>
+            <td>Filters bill register by lifecycle state: All Statuses, Draft, Approved, Paid, or Overdue.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Logging and Approving a Vendor Bill</h2>
-      <ol class="step-list">
-        <li>From the Bills workspace (<kbd>Alt + P</kbd>), click the blue <strong>+ Enter Bill</strong> button.</li>
-        <li>Select the <strong>Vendor Name</strong> and choose the corresponding <strong>Purchase Order Number</strong> from the lookup list.</li>
-        <li>Enter the vendor's official invoice number in the <strong>Supplier Bill Reference</strong> field and verify the invoice date.</li>
-        <li>Link the warehouse <strong>GRN Intake Number</strong> to pull the verified received quantities automatically.</li>
-        <li>Inspect the system <strong>3-Way Match Indicator</strong>. A green match checkmark confirms quantity and price agreement.</li>
-        <li>Verify the calculated 5% Input VAT amount against the physical invoice.</li>
-        <li>Click <strong>Submit for Approval</strong>. Once approved by the Finance Manager, the bill posts to Accounts Payable (Account 2100).</li>
-      </ol>
-
-      <h2>Discrepancy Tiers & Commercial Dispute Resolution</h2>
+      <h2>On-Screen Metric & Telemetry Cards</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Exception Type</th>
-            <th style="width: 35%;">System Match Status</th>
-            <th style="width: 40%;">Resolution Procedure</th>
+            <th style="width: 24%;">Metric Card</th>
+            <th style="width: 18%;">Display Value</th>
+            <th style="width: 58%;">Calculation Source & Operational Meaning on Screen</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Quantity Shortage</td>
-            <td><code>GRN_QTY &lt; BILLED_QTY</code></td>
-            <td>Reduce billed line quantity to match GRN; vendor must bill remainder later.</td>
+            <td class="col-field">Total Receivables (AR)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Displays outstanding customer receivables for cross-module cash context.</td>
           </tr>
           <tr>
-            <td class="col-field">Price Inflation</td>
-            <td><code>UNIT_PRICE &gt; PO_PRICE</code></td>
-            <td>System places bill on <em>Commercial Hold</em> pending buyer authorization or credit note.</td>
+            <td class="col-field">Total Payables (AP)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Cumulative outstanding vendor obligations awaiting payment authorization (synced from Account 2010).</td>
           </tr>
           <tr>
-            <td class="col-field">Invalid Vendor TRN</td>
-            <td><code>TRN_CHECK_FAIL</code></td>
-            <td>System blocks input VAT deduction; tax treated as non-recoverable expense.</td>
+            <td class="col-field">Sales Invoiced (Period)</td>
+            <td><code>AED 0.00</code></td>
+            <td>Enterprise billed revenue context for commercial cash flow comparison.</td>
+          </tr>
+          <tr>
+            <td class="col-field">OCR & GL Automated</td>
+            <td><code>0 Docs / 0 Posted</code></td>
+            <td>Automation counter showing OCR-parsed supplier bills versus auto-posted General Ledger vouchers.</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">VARIANCE EXCEPTION HANDLING</div>
-        If a price or quantity discrepancy exceeds corporate tolerance, the system flags the bill with <code>MATCH EXCEPTION</code>. The bill cannot be posted for payment until the vendor issues an adjusting credit note or the buyer re-authorizes the price increase.
+      <h2>Payables Data Grid Columns & Actions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 60%;">On-Screen Information & Action Capability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Invoice / Bill #</td>
+            <td>Sequential Link</td>
+            <td>Vendor invoice reference number; clickable to inspect line items, tax, and OCR attachments.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Customer / Vendor</td>
+            <td>Trade Name</td>
+            <td>Supplier legal business name and tax registration number (TRN) from Vendor Directory.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Dates & Total Amount</td>
+            <td>Date & Currency</td>
+            <td>Bill issuance date, payment due date, and gross payable amount in AED inclusive of 5% VAT.</td>
+          </tr>
+          <tr>
+            <td class="col-field">GL Ledger Status</td>
+            <td>Sync Indicator</td>
+            <td>Real-time General Ledger posting status (<code>Posted</code>, <code>Pending Sync</code>, <code>Error</code>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Status & Actions</td>
+            <td>Badge & Action Menu</td>
+            <td>Payment badge (Draft, Approved, Paid, Overdue) and action menu to Schedule Payment or Issue Debit Note.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <div class="callout-title">EMPTY STATE NOTIFICATION</div>
+        When no vendor bills exist in the active scope, the screen displays: <em>"No invoices found — Upload an invoice via AI OCR or create a new invoice to start auto-posting to the General Ledger."</em>
       </div>
     </div>
     """
@@ -225,125 +295,147 @@ def get_page_10():
 def get_page_11():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Supplier_Activity/01_Vendor_Directory.png",
-        "Vendor Master Directory with Supplier Profiles and Bank Disbursement Controls",
-        "/suppliers/directory",
+        "Vendor and Supplier Master Directory with AP Creditor Telemetry",
+        "/vendors",
         [
-            ("Vendor Directory Table", "Listing of approved suppliers with Trade License #, TRN, and payment terms."),
-            ("+ Add Vendor Button", "Modal trigger to register and onboard a new commercial supplier."),
-            ("Verified Banking Status", "Indicator showing whether vendor IBAN has completed dual-verification."),
-            ("Payment Run Trigger", "Filter approved due bills and initiate scheduled batch disbursement runs.")
+            ("Top Action Buttons", "Excel, PDF, and + Add New Supplier action buttons."),
+            ("4 Metric Cards", "Active Customers, Total AR Outstanding, Active Suppliers/Vendors, and Total AP Payables."),
+            ("Filter Controls", "Text search bar, Legal Entity dropdown, Currencies, Jurisdictions, and Statuses filters."),
+            ("Creditors Data Grid", "7-column table tracking Entity Code & Name, Contact, Auto-Linked GL, Terms, Balance, Status, Actions.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">COMMERCIAL & CASH · PROCURE-TO-PAY</div>
+          <div class="chapter-category">COMMERCIAL & CASH · VENDOR MASTER</div>
           <div class="chapter-title">Vendor Master Directory & Disbursement Controls</div>
         </div>
-        <div class="chapter-right-meta">MODULE 07<br>/suppliers/directory</div>
+        <div class="chapter-right-meta">MODULE 07<br>/vendors</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Supplier Activity ➔ Vendor Directory
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Supplier Activity ➔ Vendors/ Suppliers
       </div>
 
       <p>
-        The Vendor Master Directory stores supplier credentials, contact information, approved commercial payment terms, and verified bank disbursement accounts. It enforces dual-authorization controls on vendor banking details to prevent fraudulent payouts.
+        The Vendors / Suppliers directory provides centralized governance for procurement counterparties, managing trade creditor onboarding, bank disbursement details, payment terms, and automated sub-ledger mapping.
       </p>
 
       {wf}
 
-      <h2>Vendor Profile Data Dictionary & Required Inputs</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Field Name</th>
-            <th style="width: 14%;">Field Type</th>
-            <th style="width: 38%;">Operational Purpose & Format</th>
-            <th style="width: 26%;">Validation & Control Rules</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Vendor Name *</td>
-            <td>Text</td>
-            <td>Legal corporate registered name (e.g. <code>Al-Naboodah Logistics LLC</code>).</td>
-            <td>Mandatory; checked for duplicate trade names.</td>
+            <td class="col-field">+ Add New Supplier</td>
+            <td>Solid Purple Button</td>
+            <td>Opens vendor registration modal to record trade name, TRN, bank IBAN, and payment terms.</td>
           </tr>
           <tr>
-            <td class="col-field">Tax Registration (TRN)</td>
-            <td>Text (15 digits)</td>
-            <td>Official UAE FTA Tax Registration Number.</td>
-            <td>Validated: 15 numeric digits starting with 100.</td>
+            <td class="col-field">Excel & PDF</td>
+            <td>Export Buttons</td>
+            <td>Exports complete filtered vendor master database to spreadsheet or formal directory document.</td>
           </tr>
           <tr>
-            <td class="col-field">Payment Terms *</td>
-            <td>Dropdown</td>
-            <td>Standard commercial credit terms (e.g. <em>Net 30</em>, <em>Net 60</em>, <em>Immediate</em>).</td>
-            <td>Mandatory; dictates due dates on vendor bills.</td>
+            <td class="col-field">Filter Dropdowns</td>
+            <td>4 Top Dropdowns</td>
+            <td>Filters directory by Legal Entity LLC, Currency (AED/USD), Country Jurisdiction, and Status.</td>
           </tr>
           <tr>
-            <td class="col-field">Bank Name & IBAN *</td>
-            <td>Text</td>
-            <td>Supplier corporate bank name and 23-character UAE IBAN.</td>
-            <td>Requires dual-authorization before payment release.</td>
-          </tr>
-          <tr>
-            <td class="col-field">AP Control Account *</td>
-            <td>Lookup</td>
-            <td>General Ledger liability mapping (defaults to <code>2100 Accounts Payable</code>).</td>
-            <td>Mandatory; links all vendor bills to sub-ledger.</td>
+            <td class="col-field">Search Input Bar</td>
+            <td>Text Field</td>
+            <td>Instant multi-field search across supplier trade name, vendor code, and auto-linked GL account.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Onboarding a New Vendor</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Supplier Activity ➔ Vendor Directory</strong> and click <strong>+ Add Vendor</strong>.</li>
-        <li>Enter the official <strong>Vendor Legal Name</strong>, trade license number, and corporate phone/email.</li>
-        <li>Enter the 15-digit UAE <strong>Tax Registration Number (TRN)</strong> if the vendor is VAT-registered.</li>
-        <li>Input the supplier's corporate bank name, branch, and 23-character <strong>IBAN</strong>.</li>
-        <li>Attach a scanned copy of the supplier's official Bank Account Confirmation Letter in the Attachments tab.</li>
-        <li>Click <strong>Submit for Verification</strong>. An independent authorized treasury manager must review and verify the IBAN before the vendor can receive electronic payouts.</li>
-      </ol>
-
-      <h2>Weekly Vendor Disbursement Run Protocol</h2>
+      <h2>On-Screen Metric & Telemetry Cards</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Disbursement Step</th>
-            <th style="width: 35%;">Operational Action in Acconeer ERP</th>
-            <th style="width: 40%;">System Control & Output Artifact</th>
+            <th style="width: 24%;">Metric Card</th>
+            <th style="width: 18%;">Display Value</th>
+            <th style="width: 58%;">Calculation Source & Operational Meaning on Screen</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">1. Bill Due Date Filter</td>
-            <td>Filter AP bills by <em>Due on or before Friday</em>.</td>
-            <td>Aggregates verified, approved bills ready for electronic payment.</td>
+            <td class="col-field">ACTIVE CUSTOMERS</td>
+            <td><code>0</code></td>
+            <td>Debtor count context; indicates customers auto-linked to Account 1020 (Accounts Receivable).</td>
           </tr>
           <tr>
-            <td class="col-field">2. Select Paying Account</td>
-            <td>Choose corporate bank account with sufficient AED liquidity.</td>
-            <td>Verifies available funds in Account Class 1010.</td>
+            <td class="col-field">TOTAL AR OUTSTANDING</td>
+            <td><code>AED 0.00</code></td>
+            <td>Total outstanding receivables across all customer sub-ledgers.</td>
           </tr>
           <tr>
-            <td class="col-field">3. Generate Payment File</td>
-            <td>Click <em>Generate Payment File</em> for online banking.</td>
-            <td>Exports formatted bank batch transfer file (e.g. ENBD/ADCB format).</td>
+            <td class="col-field">ACTIVE SUPPLIERS</td>
+            <td><code>0</code></td>
+            <td>Active onboarded trade creditors auto-linked to Account 2010 (Accounts Payable).</td>
           </tr>
           <tr>
-            <td class="col-field">4. Post Payment Vouchers</td>
-            <td>Confirm batch release; posts GL debit to AP (2100).</td>
-            <td>Dr. AP 2100 / Cr. Bank 1010; generates vendor remittance advice PDF.</td>
+            <td class="col-field">TOTAL AP PAYABLES</td>
+            <td><code>AED 0.00</code></td>
+            <td>Cumulative balance owed across all supplier sub-ledgers awaiting disbursement.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Vendor Directory Grid Columns & System Actions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 60%;">On-Screen Information & Accounting Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Entity Code & Name</td>
+            <td>Code & Legal Name</td>
+            <td>Internal vendor code (e.g. <code>VND-00101</code>) and registered corporate business name.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Contact Info</td>
+            <td>Email & Phone</td>
+            <td>Official procurement email address, telephone contact, and billing physical address.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Auto-Linked GL</td>
+            <td>Account Number</td>
+            <td>Designated Accounts Payable sub-account mapped under Account 2010.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Payment Terms</td>
+            <td>Credit Window</td>
+            <td>Agreed payment terms (e.g. <em>Net 30 Days</em>, <em>Due on Receipt</em>, <em>Advance</em>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">GL Ledger Balance</td>
+            <td>Live Currency</td>
+            <td>Real-time balance owed to the vendor calculated from posted bills minus payments.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Status & Actions</td>
+            <td>Badge & Actions</td>
+            <td>Creditor status (Active/Hold) and menu triggers to Edit Profile, View Statement, or Make Payment.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">DISBURSEMENT RUN WORKFLOW</div>
-        To process weekly supplier payouts, click <strong>Payment Runs</strong>, select approved bills due within the current week, choose the corporate paying bank account, and click <strong>Generate Batch Payment File</strong> for online corporate banking upload.
+        <div class="callout-title">EMPTY STATE NOTIFICATION</div>
+        When no suppliers match the active search or scope filters, the table displays: <em>"No suppliers found matching your filter criteria."</em> Click <strong>+ Add New Supplier</strong> to onboard a vendor.
       </div>
     </div>
     """
@@ -351,121 +443,147 @@ def get_page_11():
 def get_page_12():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/General_Ledger/01_Journal_Entries.png",
-        "Manual Journal Voucher Entry Screen with Real-Time Debit and Credit Balancing",
-        "/gl/journals",
+        "General Ledger Journal Entries Register with Double-Entry Verification",
+        "/general-ledger",
         [
-            ("Voucher Header Information", "Voucher Number, Posting Date, Currency (AED), and Reference Description."),
-            ("Journal Line Items Grid", "Dynamic table to add GL Accounts, Cost Centers, Debit amounts, and Credit amounts."),
-            ("Real-Time Balancing Bar", "Calculates Total Debits, Total Credits, and displays Current Balance Difference."),
-            ("Save & Post Controls", "Save Draft or Post Voucher; disabled when debits do not equal credits.")
+            ("Top Actions", "Export to Excel (.xlsx) and + New Journal Entry primary action buttons."),
+            ("Filter Tabs", "All Entries (0) and Posted (0) quick-filter tabs."),
+            ("Search Input", "Search entry #, reference, memo... real-time multi-field search bar."),
+            ("Journal Grid", "6-column table tracking Voucher # & Date, Reference/Memo, Source/User, Attachments, Amount, Actions.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">GENERAL LEDGER · CORE ACCOUNTING</div>
-          <div class="chapter-title">General Ledger & Manual Journal Voucher Entry</div>
+          <div class="chapter-category">GENERAL LEDGER · DOUBLE-ENTRY ACCOUNTING</div>
+          <div class="chapter-title">General Ledger & Journal Entries</div>
         </div>
-        <div class="chapter-right-meta">MODULE 08<br>/gl/journals</div>
+        <div class="chapter-right-meta">MODULE 08<br>/general-ledger</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ General Ledger ➔ Journal Entry (or press <kbd>Alt + J</kbd>)
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Journal Entries (or <kbd>Alt + J</kbd>)
       </div>
 
       <p>
-        The General Ledger module is the core double-entry accounting engine of Acconeer ERP. Manual journal entries are utilized for adjustments, accruals, prepayments, and reclassifications with strict mathematical debit/credit equality enforcement.
+        The General Ledger workspace serves as the authoritative double-entry accounting register in Acconeer ERP. All financial events—whether entered manually or auto-posted from billing, payroll, or banking—are permanently recorded here as balanced vouchers.
       </p>
 
       {wf}
 
-      <h2>Journal Voucher Header & Line Item Data Dictionary</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Field Element</th>
-            <th style="width: 14%;">Field Type</th>
-            <th style="width: 38%;">Description & Required Format</th>
-            <th style="width: 26%;">System Validation Rules</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Voucher Date *</td>
-            <td>Date Picker</td>
-            <td>Accounting effective date for the double-entry transaction.</td>
-            <td>Must belong to an open fiscal reporting period.</td>
+            <td class="col-field">+ New Journal Entry</td>
+            <td>Solid Purple Button</td>
+            <td>Opens the double-entry voucher creation modal with debit/credit balancing validation.</td>
           </tr>
           <tr>
-            <td class="col-field">Journal Reference *</td>
-            <td>Text</td>
-            <td>Descriptive narrative explaining purpose (e.g. <code>Monthly Rent Accrual</code>).</td>
-            <td>Mandatory; minimum 5 characters.</td>
+            <td class="col-field">Export to Excel (.xlsx)</td>
+            <td>Solid Green Button</td>
+            <td>Exports complete general ledger journal book to formatted Excel workbook.</td>
           </tr>
           <tr>
-            <td class="col-field">GL Account *</td>
-            <td>Account Lookup</td>
-            <td>Select 5-digit account from Chart of Accounts (e.g. <code>6100 Rent Expense</code>).</td>
-            <td>Requires at least two valid account lines.</td>
+            <td class="col-field">All Entries (0)</td>
+            <td>Active Black Pill</td>
+            <td>Filter tab displaying all journal vouchers within the selected fiscal scope regardless of status.</td>
           </tr>
           <tr>
-            <td class="col-field">Debit / Credit *</td>
-            <td>Numeric (AED)</td>
-            <td>Monetary transaction amount formatted to two decimal places.</td>
-            <td>Either Debit or Credit per row; cannot be both.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Branch / Cost Center</td>
-            <td>Dropdown</td>
-            <td>Assigns transaction to specific operating branch or department.</td>
-            <td>Mandatory for Expense (6000) accounts.</td>
+            <td class="col-field">Posted (0)</td>
+            <td>Filter Tab</td>
+            <td>Filter tab displaying only finalized, immutable journal entries that have posted to trial balances.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Creating and Posting a Journal Voucher</h2>
-      <ol class="step-list">
-        <li>Click <strong>+ New Journal</strong> in the top toolbar or press <kbd>Alt + J</kbd> on your keyboard.</li>
-        <li>Confirm the active <strong>Voucher Date</strong> and enter a clear commercial narrative in the <strong>Reference</strong> box.</li>
-        <li>On line 1, select the target account to debit, select the cost center, and enter the <strong>Debit Amount</strong>.</li>
-        <li>Click <strong>+ Add Line</strong>. On line 2, select the account to credit and enter the matching <strong>Credit Amount</strong>.</li>
-        <li>Inspect the bottom balancing counter: verify that <strong>Total Debits</strong> equals <strong>Total Credits</strong> with <code>Difference: 0.00 AED</code>.</li>
-        <li>Optionally upload supporting PDF documentation (e.g. calculation spreadsheet) in the attachments drawer.</li>
-        <li>Click <strong>Post Voucher</strong>. The system assigns an immutable sequence number (e.g. <code>JV-2026-0184</code>) and updates GL balances.</li>
-      </ol>
-
-      <h2>Standard Recurring Journal Templates & Reversals</h2>
+      <h2>Journal Register Grid Columns & Field Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Journal Entry Type</th>
-            <th style="width: 35%;">Typical Debit / Credit Accounts</th>
-            <th style="width: 40%;">Operational Usage & Timing</th>
+            <th style="width: 22%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 60%;">On-Screen Information & Accounting Purpose</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Prepaid Rent Amortization</td>
-            <td>Dr. Rent Expense 6100 / Cr. Prepaid Rent 1300</td>
-            <td>Monthly recurring schedule amortizing quarterly lease payments.</td>
+            <td class="col-field">VOUCHER # & DATE</td>
+            <td>Code & Timestamp</td>
+            <td>Sequential voucher code (e.g. <code>JV-2026-0042</code>) and effective accounting value date.</td>
           </tr>
           <tr>
-            <td class="col-field">Accrued Utilities / Audit</td>
-            <td>Dr. Utilities 6150 / Cr. Accrued Expenses 2350</td>
-            <td>Month-end accrual for unbilled operational utility expenses.</td>
+            <td class="col-field">REFERENCE / MEMO</td>
+            <td>Text Narration</td>
+            <td>Operational description, external transaction memo, or adjustment justification narrative.</td>
           </tr>
           <tr>
-            <td class="col-field">Voucher Reversal</td>
-            <td>Dr./Cr. exact inversion of original voucher lines</td>
-            <td>Click <em>Reverse Voucher</em> on posted record to correct errors cleanly.</td>
+            <td class="col-field">SOURCE / USER</td>
+            <td>Origin Tag & User</td>
+            <td>Sub-system source (Manual Entry, Invoicing, Payroll Run) and creator username.</td>
+          </tr>
+          <tr>
+            <td class="col-field">ATTACHMENTS</td>
+            <td>Document Counter</td>
+            <td>Count of uploaded supporting audit documents (signed slips, receipts, agreements).</td>
+          </tr>
+          <tr>
+            <td class="col-field">TOTAL AMOUNT</td>
+            <td>Balanced Currency</td>
+            <td>Total voucher value in AED; system enforces Total Debits must equal Total Credits before save.</td>
+          </tr>
+          <tr>
+            <td class="col-field">ACTIONS</td>
+            <td>Context Menu</td>
+            <td>Menu triggers to <em>View Voucher Lines</em>, <em>Print Journal Slip</em>, or <em>Post Reversal Voucher</em>.</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">IMMUTABILITY & REVERSAL PROTOCOL</div>
-        Posted journal vouchers are permanently locked in the database and cannot be edited or deleted. To correct an erroneous voucher, open the record and click <strong>Reverse Voucher</strong> to generate an exact offsetting journal entry.
+      <h2>Voucher Source System Classifications & Prefix Conventions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Voucher Prefix</th>
+            <th style="width: 38%;">Originating Sub-System</th>
+            <th style="width: 40%;">Default General Ledger Account Posting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">JV-2026-XXXX</td>
+            <td>Manual General Ledger Adjusting Voucher</td>
+            <td>Discretionary accounts; requires dual-sign approval for high values.</td>
+          </tr>
+          <tr>
+            <td class="col-field">INV-2026-XXXX</td>
+            <td>Sales Invoicing Module Auto-Post</td>
+            <td>Dr. Accounts Receivable (1020) / Cr. Sales (4000) / Cr. VAT (2200).</td>
+          </tr>
+          <tr>
+            <td class="col-field">BIL-2026-XXXX</td>
+            <td>Supplier Bills Payables Auto-Post</td>
+            <td>Dr. Expense (5000/6000) / Dr. VAT (1300) / Cr. Accounts Payable (2010).</td>
+          </tr>
+          <tr>
+            <td class="col-field">PAY-2026-XXXX</td>
+            <td>Payroll Processing Engine Auto-Post</td>
+            <td>Dr. Salaries (6010) / Cr. Payroll Clearing / Bank Account (1010).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <div class="callout-title">EMPTY STATE NOTIFICATION</div>
+        When no journal vouchers exist matching the selected filter or date window, the register displays: <em>"No journal entries match this filter."</em> Click <strong>+ New Journal Entry</strong> to create a manual voucher.
       </div>
     </div>
     """
@@ -473,126 +591,164 @@ def get_page_12():
 def get_page_13():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Chart_of_Accounts/01_Accounts_Tree.png",
-        "Chart of Accounts Master Tree with 5-Digit Structure and Sub-Account Mapping",
-        "/gl/coa",
+        "Chart of Accounts (COA) Hierarchical Tree Structure & Account Mapping",
+        "/chart-of-accounts",
         [
-            ("Account Classification Tree", "Hierarchical tree view of Assets (1000), Liabilities (2000), Equity (3000), Revenue (4000), and Expenses (5000/6000)."),
-            ("+ Add Account Button", "Primary action trigger to configure a new general ledger posting account."),
-            ("Control Account Locks", "Visual padlock icons identifying system control accounts linked to sub-ledgers."),
-            ("Real-Time Account Balances", "Current opening balance, net period movement, and closing balance in AED.")
+            ("Top Actions", "Excel, PDF, Opening Balances, and + Map New Sub-Account action buttons."),
+            ("Class Filters", "Category pills for All Accounts (1000-7999), Assets, Liabilities, Equity, Revenue, COGS, Expense."),
+            ("Search Bar", "Search account code, name... real-time multi-field search input."),
+            ("Hierarchical Tree", "Columns for Account Code, Title & Description, Classification, Type, Normal, Currency, Balance, Actions.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">GENERAL LEDGER · MASTER DATA</div>
-          <div class="chapter-title">Chart of Accounts (COA) Structure & Creation</div>
+          <div class="chapter-category">GENERAL LEDGER · FINANCIAL FOUNDATION</div>
+          <div class="chapter-title">Chart of Accounts Hierarchy & Account Mapping</div>
         </div>
-        <div class="chapter-right-meta">MODULE 09<br>/gl/coa</div>
+        <div class="chapter-right-meta">MODULE 09<br>/chart-of-accounts</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ General Ledger ➔ Chart of Accounts (or press <kbd>Alt + A</kbd>)
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Chart of Accounts (or <kbd>Alt + A</kbd>)
       </div>
 
       <p>
-        The Chart of Accounts (COA) establishes the foundational financial taxonomy of Acconeer ERP. It organizes accounts using a standardized 5-digit numbering system compliant with IFRS standards and UAE corporate reporting structures.
+        The Chart of Accounts (COA) defines the foundational accounting architecture of Acconeer ERP. It establishes the multi-tier numerical hierarchy for balance sheet assets, liabilities, equity, revenues, and operating expenses.
       </p>
 
       {wf}
 
-      <h2>Standard 5-Digit Account Classification Framework</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 14%;">Code Range</th>
-            <th style="width: 22%;">Major Account Class</th>
-            <th style="width: 20%;">Normal Balance</th>
-            <th style="width: 44%;">Operational Representative Examples</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><code>1000–1999</code></td>
-            <td><strong>Current & Fixed Assets</strong></td>
-            <td>Debit</td>
-            <td><code>1010 Bank Current Accounts</code> • <code>1200 Accounts Receivable</code> • <code>1400 Inventory</code></td>
+            <td class="col-field">+ Map New Sub-Account</td>
+            <td>Solid Purple Button</td>
+            <td>Opens modal to map and create a subsidiary account under an existing parent code.</td>
           </tr>
           <tr>
-            <td><code>2000–2999</code></td>
-            <td><strong>Liabilities & Accruals</strong></td>
-            <td>Credit</td>
-            <td><code>2100 Accounts Payable</code> • <code>2200 Output VAT Payable</code> • <code>2300 Accrued Salaries</code></td>
+            <td class="col-field">Opening Balances</td>
+            <td>Teal Outline Button</td>
+            <td>Opens interface to record starting debit/credit balances for newly migrated accounting ledgers.</td>
           </tr>
           <tr>
-            <td><code>3000–3999</code></td>
-            <td><strong>Shareholders' Equity</strong></td>
-            <td>Credit</td>
-            <td><code>3010 Paid-Up Share Capital</code> • <code>3100 Retained Earnings</code> • <code>3200 Statutory Reserve</code></td>
+            <td class="col-field">Excel & PDF</td>
+            <td>Export Buttons</td>
+            <td>Exports entire hierarchical chart of accounts to spreadsheet or formal audit document.</td>
           </tr>
           <tr>
-            <td><code>4000–4999</code></td>
-            <td><strong>Operating Revenue</strong></td>
-            <td>Credit</td>
-            <td><code>4000 Commercial Sales Revenue</code> • <code>4100 Service Income</code> • <code>4200 Logistics Fees</code></td>
-          </tr>
-          <tr>
-            <td><code>5000–5999</code></td>
-            <td><strong>Cost of Goods Sold (COGS)</strong></td>
-            <td>Debit</td>
-            <td><code>5000 Direct Material Costs</code> • <code>5100 Freight Inbound</code> • <code>5200 Packaging</code></td>
-          </tr>
-          <tr>
-            <td><code>6000–6999</code></td>
-            <td><strong>Operating Expenses (OpEx)</strong></td>
-            <td>Debit</td>
-            <td><code>6010 Staff Salaries</code> • <code>6100 Office Rent</code> • <code>6200 Depreciation Expense</code></td>
+            <td class="col-field">Account Class Pills</td>
+            <td>Filter Buttons</td>
+            <td>Pills to filter by class: Assets (1000s), Liabilities (2000s), Equity (3000s), Revenue (4000s), COGS (5000s), Expenses (6000s).</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Adding a New Account to the COA</h2>
-      <ol class="step-list">
-        <li>Navigate to the Chart of Accounts (<kbd>Alt + A</kbd>) and click the blue <strong>+ Add Account</strong> button.</li>
-        <li>Select the <strong>Parent Account Category</strong> (e.g. <em>6000 Operating Expenses</em>).</li>
-        <li>Enter the unique 5-digit <strong>Account Code</strong> (e.g. <code>6250</code> for <em>Software Subscriptions</em>).</li>
-        <li>Enter the official <strong>Account Name</strong> and select the currency (defaults to <code>AED</code>).</li>
-        <li>Choose whether the account is an operational posting account or a non-posting summary header.</li>
-        <li>Click <strong>Save & Add to Tree</strong>. The account is immediately available for journal and voucher postings.</li>
-      </ol>
-
-      <h2>Sub-Account Nesting & Inactivation Policies</h2>
+      <h2>Tree Table Columns & Account Node Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">COA Policy Dimension</th>
-            <th style="width: 35%;">System Architectural Rule</th>
-            <th style="width: 40%;">Accounting Governance Behavior</th>
+            <th style="width: 22%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 60%;">On-Screen Information & Accounting Purpose</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Sub-Account Mapping</td>
-            <td>Click <em>+ Map Sub</em> on parent to create child branch accounts.</td>
-            <td>Child balances automatically roll up to parent header on Trial Balance.</td>
+            <td class="col-field">ACCOUNT CODE</td>
+            <td>Numeric Code</td>
+            <td>4-digit primary code with lock icon indicating protected GAAP control account.</td>
           </tr>
           <tr>
-            <td class="col-field">Account Inactivation</td>
-            <td>Accounts with zero balance can be set to <em>Inactive</em>.</td>
-            <td>Hides account from active lookup dropdowns while preserving history.</td>
+            <td class="col-field">ACCOUNT TITLE</td>
+            <td>Text & Subtext</td>
+            <td>Official title (e.g. <em>Cash and Cash Equivalents</em>) and descriptive operational definition.</td>
           </tr>
           <tr>
-            <td class="col-field">Control Account Lock</td>
-            <td>Accounts 1200, 2100, 1400 locked against manual journals.</td>
-            <td>Ensures sub-ledger integrity; postings allowed only via Invoices/Bills.</td>
+            <td class="col-field">CLASSIFICATION</td>
+            <td>Standard Tag</td>
+            <td>Statutory accounting framework classification tag (e.g. <code>GAAP Primary</code>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">TYPE & NORMAL</td>
+            <td>Badges</td>
+            <td>Statement category badge (<code>ASSET</code>, <code>LIABILITY</code>) and natural balance (<code>DEBIT</code> or <code>CREDIT</code>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">CURRENT BALANCE</td>
+            <td>Live Currency</td>
+            <td>Cumulative balance in base currency (AED) calculated across all posted general ledger journals.</td>
+          </tr>
+          <tr>
+            <td class="col-field">ACTIONS</td>
+            <td>Context Trigger</td>
+            <td>Clickable <code>+ Map Sub</code> trigger to instantly add a child ledger under that parent node.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Chart of Accounts Numerical Architecture & Range Hierarchy</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Code Range</th>
+            <th style="width: 30%;">Account Class</th>
+            <th style="width: 25%;">Normal Balance</th>
+            <th style="width: 25%;">Financial Statement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">1000 – 1999</td>
+            <td>Current & Fixed Assets</td>
+            <td>DEBIT</td>
+            <td>Balance Sheet (Assets)</td>
+          </tr>
+          <tr>
+            <td class="col-field">2000 – 2999</td>
+            <td>Liabilities (AP, Accruals, VAT)</td>
+            <td>CREDIT</td>
+            <td>Balance Sheet (Liabilities)</td>
+          </tr>
+          <tr>
+            <td class="col-field">3000 – 3999</td>
+            <td>Equity & Retained Earnings</td>
+            <td>CREDIT</td>
+            <td>Balance Sheet (Equity)</td>
+          </tr>
+          <tr>
+            <td class="col-field">4000 – 4999</td>
+            <td>Operating Commercial Revenue</td>
+            <td>CREDIT</td>
+            <td>Profit & Loss (P&L)</td>
+          </tr>
+          <tr>
+            <td class="col-field">5000 – 5999</td>
+            <td>Cost of Goods Sold (COGS)</td>
+            <td>DEBIT</td>
+            <td>Profit & Loss (P&L)</td>
+          </tr>
+          <tr>
+            <td class="col-field">6000 – 6999</td>
+            <td>Operating & Administrative Expenses</td>
+            <td>DEBIT</td>
+            <td>Profit & Loss (P&L)</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">PROTECTION OF SUB-LEDGER CONTROL ACCOUNTS</div>
-        Accounts flagged with a lock symbol (e.g. <code>1200 AR Control</code>, <code>2100 AP Control</code>, <code>1400 Inventory Control</code>) are system control accounts. Manual journal entries to these accounts are restricted to prevent variances between sub-ledgers and the general ledger.
+        <div class="callout-title">SUB-ACCOUNT NESTING GUIDANCE</div>
+        Expanding a parent node displays subsidiary accounts. If no child accounts exist, the system indicates: <em>"No custom sub-accounts mapped under 1010. Click '+ Map Sub' to create one."</em> Use sub-accounts for individual bank accounts and credit cards.
       </div>
     </div>
     """
@@ -600,127 +756,147 @@ def get_page_13():
 def get_page_14():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Inventory/01_Inventory_Master.png",
-        "Inventory Product Master Catalog with Stock Levels and Valuation Parameters",
-        "/inventory/products",
+        "Inventory Master Catalog & Stock Valuation Management",
+        "/inventory",
         [
-            ("Inventory Catalog Grid", "Comprehensive directory of active SKUs, categories, quantities on hand, and cost values."),
-            ("+ Add Item Button", "Primary action trigger to configure a new stock or non-stock inventory item."),
-            ("Stock Health Indicators", "Real-time stock indicators showing Healthy, Low Stock, or Out of Stock."),
-            ("Valuation Engine Trigger", "Access FIFO and Weighted Average Cost (WAC) ledger valuation reports.")
+            ("Top Actions", "Excel, PDF, Opening Balances, and + Add SKU action buttons."),
+            ("Category Pills", "Filter items by category, raw materials, finished goods, and consumables."),
+            ("Search Input", "Search SKU, item code, barcode, or product name in real-time."),
+            ("Inventory Grid", "Tracks SKU Code, Description, Category, UOM, Valuation, Cost, Price, Stock on Hand, Actions.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">INVENTORY & ASSETS · SUPPLY CHAIN</div>
+          <div class="chapter-category">INVENTORY & WAREHOUSE · STOCK CONTROLS</div>
           <div class="chapter-title">Inventory Master Catalog & Valuation Rules</div>
         </div>
-        <div class="chapter-right-meta">MODULE 10<br>/inventory/products</div>
+        <div class="chapter-right-meta">MODULE 10<br>/inventory</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Inventory ➔ Product Master
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Inventory ➔ Inventory Master
       </div>
 
       <p>
-        The Inventory Master module maintains the centralized product catalog, tracks real-time warehouse stock balances, manages stock reorder thresholds, and calculates accurate inventory valuation under First-In, First-Out (FIFO) or Weighted Average Costing (WAC).
+        The Inventory Master workspace governs the corporate product catalog, warehouse stock balances, unit-of-measure definitions, reorder thresholds, and inventory valuation accounting methods (FIFO and Weighted Average Cost).
       </p>
 
       {wf}
 
-      <h2>Inventory Item Profile Data Dictionary</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Field Name</th>
-            <th style="width: 14%;">Field Type</th>
-            <th style="width: 38%;">Operational Purpose & Format</th>
-            <th style="width: 26%;">Validation & Control Rules</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Item SKU Code *</td>
-            <td>Text</td>
-            <td>Unique product identifier (e.g. <code>SKU-ELEC-0042</code>).</td>
-            <td>Mandatory; alphanumeric unique constraint.</td>
+            <td class="col-field">+ Add SKU</td>
+            <td>Solid Purple Button</td>
+            <td>Opens product registration modal to define SKU code, name, UOM, cost price, and sales price.</td>
           </tr>
           <tr>
-            <td class="col-field">Item Name *</td>
-            <td>Text</td>
-            <td>Commercial product description used on customer invoices.</td>
-            <td>Mandatory; minimum 3 characters.</td>
+            <td class="col-field">+ Add Category</td>
+            <td>Outline Button</td>
+            <td>Creates a new product family taxonomy to group items for reporting and GL revenue mapping.</td>
           </tr>
           <tr>
-            <td class="col-field">Item Category *</td>
-            <td>Dropdown</td>
-            <td>Classification (e.g. <em>Electronics</em>, <em>Raw Materials</em>, <em>Finished Goods</em>).</td>
-            <td>Determines default GL inventory and COGS accounts.</td>
+            <td class="col-field">Excel & PDF</td>
+            <td>Export Buttons</td>
+            <td>Downloads complete inventory catalog and stock-on-hand valuation report to spreadsheet or PDF.</td>
           </tr>
           <tr>
-            <td class="col-field">Unit of Measure (UOM) *</td>
-            <td>Dropdown</td>
-            <td>Physical stocking unit (e.g. <code>PCS</code>, <code>BOX</code>, <code>KG</code>, <code>MTR</code>).</td>
-            <td>Mandatory; governs warehouse piece counts.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Costing Method *</td>
-            <td>Dropdown</td>
-            <td>Valuation rule: <code>FIFO (First-In, First-Out)</code> or <code>Weighted Average (WAC)</code>.</td>
-            <td>Fixed per item category; dictates balance sheet valuation.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Reorder Level</td>
-            <td>Numeric</td>
-            <td>Minimum warehouse stock threshold before reorder alert fires.</td>
-            <td>Triggers automated replenishment notification.</td>
+            <td class="col-field">Search Input Bar</td>
+            <td>Text Field</td>
+            <td>Real-time filter searching across SKU codes, item descriptions, and barcode identifiers.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Creating a New Inventory SKU</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Inventory ➔ Product Master</strong> and click the blue <strong>+ Add Item</strong> button.</li>
-        <li>Enter the unique <strong>SKU Code</strong> and complete descriptive <strong>Item Name</strong>.</li>
-        <li>Select the <strong>Item Category</strong> and assign the physical <strong>Unit of Measure (UOM)</strong>.</li>
-        <li>Enter the standard purchase cost and default commercial selling price in AED.</li>
-        <li>Set the <strong>Reorder Level</strong> (e.g. <code>50 PCS</code>) to ensure automated low-stock warnings appear on the dashboard.</li>
-        <li>Verify that the linked GL accounts populate: <strong>Inventory Asset (Account 1400)</strong> and <strong>COGS (Account 5000)</strong>.</li>
-        <li>Click <strong>Save & Register SKU</strong> to activate the item across purchasing and sales modules.</li>
-      </ol>
-
-      <h2>Physical Stock Counts & Inventory Adjustments</h2>
+      <h2>Inventory Register Grid Columns & Field Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Inventory Procedure</th>
-            <th style="width: 35%;">Action Trigger & Inputs</th>
-            <th style="width: 40%;">System Accounting & Stock Impact</th>
+            <th style="width: 20%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 62%;">On-Screen Information & Operational Impact</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Stock Take Reconciliation</td>
-            <td>Navigate to <em>Physical Count</em>; input counted physical units.</td>
-            <td>System highlights variance between book stock and counted stock.</td>
+            <td class="col-field">SKU Code</td>
+            <td>Code & Barcode</td>
+            <td>Unique product stock keeping unit (e.g. <code>SKU-ELC-0091</code>); links to item card.</td>
           </tr>
           <tr>
-            <td class="col-field">Inventory Shrinkage Write-Off</td>
-            <td>Post <em>Stock Adjustment Voucher</em> for damaged/lost inventory.</td>
-            <td>Dr. Inventory Shrinkage Expense (5150) / Cr. Inventory Asset (1400).</td>
+            <td class="col-field">Item Name & UOM</td>
+            <td>Text & Unit Badge</td>
+            <td>Commercial description and stock unit of measure (e.g. <code>PCS</code>, <code>BOX</code>, <code>KG</code>, <code>SET</code>).</td>
           </tr>
           <tr>
-            <td class="col-field">Inter-Warehouse Transfer</td>
-            <td>Create <em>Transfer Order</em>: Dubai Main Depot to Abu Dhabi.</td>
-            <td>Updates physical warehouse bin tags; balance sheet remains unchanged.</td>
+            <td class="col-field">Valuation Method</td>
+            <td>Costing Badge</td>
+            <td>Assigned inventory valuation rule: <code>FIFO</code> (First-In, First-Out) or <code>WAC</code> (Weighted Average Cost).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Cost Price & Selling Price</td>
+            <td>Currency Amounts</td>
+            <td>Standard unit acquisition cost and default commercial sales price in AED.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Stock on Hand</td>
+            <td>Numeric Counter</td>
+            <td>Physical quantity currently located across active warehouse facilities.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Actions</td>
+            <td>Context Menu</td>
+            <td>Options to <em>Adjust Stock Quantity</em>, <em>View Stock Movement Ledger</em>, or <em>Edit SKU Specs</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Stock Level Indicators & Automated Reorder Alert Thresholds</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Stock Indicator</th>
+            <th style="width: 38%;">Warehouse Inventory Condition</th>
+            <th style="width: 40%;">System Alert & Procurement Action Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">In Stock</td>
+            <td>Stock on hand exceeds minimum safety buffer.</td>
+            <td>Available for sales order allocation and delivery notes.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Low Stock Alert</td>
+            <td>Quantity falls below designated Reorder Point.</td>
+            <td>Amber badge displayed; triggers automated purchase requisition.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Out of Stock</td>
+            <td>Zero physical units remaining in active bins.</td>
+            <td>Red alert; delivery notes blocked unless backorder is approved.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Quarantined</td>
+            <td>Damaged or uninspected GRN shipments.</td>
+            <td>Held in Account 1410 (Quarantine Stock) pending quality sign-off.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">REAL-TIME INVENTORY GL INTEGRATION</div>
-        Acconeer ERP uses a perpetual inventory system. Receiving goods via a GRN immediately debits Inventory Asset 1400. Fulfilling a sales order immediately credits Inventory 1400 and debits Cost of Goods Sold 5000 with zero manual journals required.
+        <div class="callout-title">GENERAL LEDGER INTEGRATION</div>
+        Every inventory receipt or dispatch automatically posts balancing vouchers: Inventory Receipts credit Account 2010 (AP) and debit Account 1400 (Inventory Asset); Sales Dispatches debit Account 5000 (COGS) and credit Account 1400.
       </div>
     </div>
     """
@@ -728,115 +904,147 @@ def get_page_14():
 def get_page_15():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Inventory/11_Goods_Received_Note.png",
-        "Goods Received Notes (GRN) Inbound Intake Register and Warehouse Quality Inspection",
+        "Goods Received Notes (GRN) & Warehouse Inbound Intake Register",
         "/inventory/grn",
         [
-            ("GRN Intake Register", "Log of inbound warehouse deliveries with GRN #, Vendor, PO Ref, and Intake Date."),
-            ("+ New GRN Intake", "Primary action trigger to initiate a warehouse receipt against an open purchase order."),
-            ("Inspection Counter", "Tracks Received Quantity, Accepted Quality Count, and Rejected Discrepancy Count."),
-            ("Post to Warehouse", "Finalize physical intake, assign warehouse bin location, and post GL inventory accrual.")
+            ("Top Actions", "Export and + New Goods Received Note primary action buttons."),
+            ("Search & Filter", "Search by GRN #, PO #, supplier name, and status filter dropdown."),
+            ("Receiving Grid", "Columns for GRN #, PO Reference, Supplier, Receipt Date, Location, Qty, Status, Actions."),
+            ("3-Way Match Link", "Direct verification of physically received goods against purchase orders.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">INVENTORY & ASSETS · SUPPLY CHAIN</div>
+          <div class="chapter-category">INVENTORY & WAREHOUSE · INBOUND RECEIVING</div>
           <div class="chapter-title">Goods Received Notes (GRN) & Warehouse Intake</div>
         </div>
         <div class="chapter-right-meta">MODULE 11<br>/inventory/grn</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Inventory ➔ Goods Received Notes
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Inventory ➔ Goods Received Note (GRN)
       </div>
 
       <p>
-        The Goods Received Notes (GRN) module governs physical warehouse receiving, inbound inspection, quality control verification, and automated inventory accrual. Completing a GRN updates on-hand stock balances and forms the basis for 3-way matching.
+        The Goods Received Note (GRN) workspace logs physical warehouse deliveries from suppliers. Creating a GRN validates delivered goods against purchase order quantities, performs quality inspection, and updates perpetual inventory asset ledgers.
       </p>
 
       {wf}
 
-      <h2>GRN Receiving Fields & Quality Inspection Tracking</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Interface Field</th>
-            <th style="width: 38%;">Description & Operating Role</th>
-            <th style="width: 40%;">System Validation & Inventory Impact</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Purchase Order Ref *</td>
-            <td>Open procurement order authorizing supplier delivery.</td>
-            <td>Auto-loads ordered SKU line items and expected quantities.</td>
+            <td class="col-field">+ New Goods Received Note</td>
+            <td>Solid Purple Button</td>
+            <td>Opens inbound intake form to link an approved Purchase Order and record delivered item counts.</td>
           </tr>
           <tr>
-            <td class="col-field">Delivered Quantity *</td>
-            <td>Physical quantity counted upon truck unloading at dock.</td>
-            <td>Cannot exceed PO ordered quantity without buyer variance override.</td>
+            <td class="col-field">Export Register</td>
+            <td>Export Button</td>
+            <td>Exports complete warehouse receiving history and inspection status to Excel or PDF.</td>
           </tr>
           <tr>
-            <td class="col-field">Accepted Quantity *</td>
-            <td>Items passing physical inspection and quality verification.</td>
-            <td>This exact quantity increments physical stock on hand.</td>
+            <td class="col-field">Status Filter</td>
+            <td>Dropdown Filter</td>
+            <td>Filters receiving records by status: <code>All Statuses</code>, <code>Accepted</code>, <code>Quarantined</code>, <code>Rejected</code>.</td>
           </tr>
           <tr>
-            <td class="col-field">Rejected Quantity</td>
-            <td>Items damaged in transit or failing specifications.</td>
-            <td>Routed to quarantine; generates automated vendor return notice.</td>
-          </tr>
-          <tr>
-            <td class="col-field">Warehouse Bin Location *</td>
-            <td>Physical rack and shelf storage tag (e.g. <code>BIN-DXB-A-12</code>).</td>
-            <td>Directs warehouse pickers during order fulfillment.</td>
+            <td class="col-field">Search Input Bar</td>
+            <td>Text Field</td>
+            <td>Real-time search across GRN numbers, purchase order references, and supplier business names.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Processing Warehouse Inbound Intake</h2>
-      <ol class="step-list">
-        <li>From the GRN workspace, click the blue <strong>+ New GRN Intake</strong> button.</li>
-        <li>Select the delivering <strong>Supplier Name</strong> and choose the active <strong>Purchase Order Number</strong>.</li>
-        <li>Enter the supplier delivery note number and the physical arrival date.</li>
-        <li>For each line item, enter the physical <strong>Delivered Quantity</strong> and verify against the packing list.</li>
-        <li>Enter the <strong>Accepted Quantity</strong> following physical inspection. If damaged goods are found, log the count in <strong>Rejected Quantity</strong>.</li>
-        <li>Assign the target <strong>Warehouse Bin Location</strong> for stock shelving.</li>
-        <li>Click <strong>Post GRN Intake</strong>. The system prints warehouse stock labels and generates the inventory accrual voucher.</li>
-      </ol>
-
-      <h2>Inbound Quality Discrepancy & Quarantine Protocol</h2>
+      <h2>GRN Register Grid Columns & Field Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Discrepancy Category</th>
-            <th style="width: 35%;">Warehouse Action Required</th>
-            <th style="width: 40%;">Accounting & Supplier Resolution</th>
+            <th style="width: 20%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 62%;">On-Screen Information & Operational Impact</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Physical Transit Damage</td>
-            <td>Log units in <em>Rejected Qty</em>; take photos via attachment drawer.</td>
-            <td>Generates Return-to-Vendor (RTV) slip; unit excluded from AP bill.</td>
+            <td class="col-field">GRN Number</td>
+            <td>Sequential Link</td>
+            <td>System sequential tracking code (e.g. <code>GRN-2026-0018</code>); clickable to inspect delivery details.</td>
           </tr>
           <tr>
-            <td class="col-field">Incorrect SKU Delivered</td>
-            <td>Reject item; do not assign warehouse bin location.</td>
-            <td>System notifies purchasing officer for immediate supplier replacement.</td>
+            <td class="col-field">PO Reference</td>
+            <td>Linked Order #</td>
+            <td>Hyperlinked purchase order reference establishing the 3-way procure-to-pay match.</td>
           </tr>
           <tr>
-            <td class="col-field">Over-Shipment (+Q)</td>
-            <td>Count units; buyer must approve addition before intake.</td>
-            <td>If accepted, auto-updates PO line item quantity and purchase total.</td>
+            <td class="col-field">Supplier / Vendor</td>
+            <td>Trade Name</td>
+            <td>Delivering vendor legal entity name and delivery driver consignment reference.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Receipt Date & Location</td>
+            <td>Date & Facility</td>
+            <td>Physical delivery date and receiving warehouse facility/bin location.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Received Qty & Status</td>
+            <td>Counts & Badges</td>
+            <td>Delivered quantity versus ordered count, and quality status badge (<code>Accepted</code> or <code>Quarantine</code>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Actions</td>
+            <td>Context Menu</td>
+            <td>Menu triggers to <em>Print GRN Slip</em>, <em>View Inspection Log</em>, or <em>Generate Supplier Bill</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Warehouse Quality Inspection Classifications & Dispositions</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Inspection Code</th>
+            <th style="width: 38%;">Physical Goods Evaluation Condition</th>
+            <th style="width: 40%;">Inventory Ledger & Bill Settlement Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Accepted to Stock</td>
+            <td>Item counts match packing slip; zero packaging damage.</td>
+            <td>Posts full quantity to Active Inventory (1400); clears for billing.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Short Shipment</td>
+            <td>Received count is less than ordered PO quantity.</td>
+            <td>GRN updates to partial intake; invoice matched only to received units.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Quarantined (QC)</td>
+            <td>Technical goods requiring lab testing or serial logging.</td>
+            <td>Held in Account 1410; excluded from sales dispatch availability.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Rejected / Return</td>
+            <td>Damaged in transit or incorrect product SKU.</td>
+            <td>Intake rejected; generates vendor Debit Note / Return Slip.</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">ACCOUNTING IMPACT: POSTING A GRN</div>
-        Posting a GRN synchronously records: <strong>Debit Account 1400 (Inventory Control)</strong> for the accepted stock value and <strong>Credit Account 2150 (Accrued Purchases / GRN Clearing)</strong>. When the supplier bill arrives, Account 2150 clears against Accounts Payable.
+        <div class="callout-title">3-WAY MATCHING ENFORCEMENT</div>
+        When a supplier bill is entered, Acconeer ERP automatically compares the billed quantity against the accepted quantity on the linked GRN. Variances exceeding allowable tolerance require management authorization before payment release.
       </div>
     </div>
     """
@@ -844,115 +1052,147 @@ def get_page_15():
 def get_page_16():
     wf = window_frame(
         "Acconeer_ERP_UserFlows/Assets/06_Asset_Register.png",
-        "Fixed Assets Master Registry with Capitalization Values and Depreciation Schedules",
-        "/assets/registry",
+        "Fixed Asset Register with Capitalization and Depreciation Schedules",
+        "/assets",
         [
-            ("Asset Registry Table", "Inventory of capitalized company assets with Asset Tag #, Category, Cost, and NBV."),
-            ("+ Register Asset", "Primary action trigger to capitalize a new fixed asset from a supplier bill or PO."),
-            ("Depreciation Status", "Tracks monthly depreciation progress, accumulated depreciation, and useful life."),
-            ("Run Depreciation Batch", "Execute automated monthly straight-line depreciation journal postings.")
+            ("Top Actions", "Excel, PDF, Run Depreciation, and + Register New Asset action buttons."),
+            ("Category Filters", "Filter assets by Machinery, IT Equipment, Vehicles, Buildings, and Furniture."),
+            ("Search Input", "Search asset tag, serial number, location, or custodian in real-time."),
+            ("Asset Grid", "Columns for Asset Tag, Description, Category, Cost, Depreciation, Net Book Value, Actions.")
         ]
     )
     return f"""
     <div class="page">
       <div class="chapter-header">
         <div>
-          <div class="chapter-category">INVENTORY & ASSETS · CAPITAL ASSETS</div>
+          <div class="chapter-category">FIXED ASSETS · CAPITALIZATION & AMORTIZATION</div>
           <div class="chapter-title">Fixed Assets Registry & Monthly Depreciation</div>
         </div>
-        <div class="chapter-right-meta">MODULE 12<br>/assets/registry</div>
+        <div class="chapter-right-meta">MODULE 12<br>/assets</div>
       </div>
 
       <div class="nav-path">
-        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Fixed Assets ➔ Asset Registry
+        <strong>NAVIGATION:</strong> Sidebar Navigation ➔ Assets ➔ Asset Register
       </div>
 
       <p>
-        The Fixed Assets module maintains the capital equipment register, records asset acquisition costs, manages physical asset tag assignments, and automates monthly depreciation schedules in compliance with International Accounting Standard 16 (IAS 16).
+        The Fixed Assets Register tracks company capital assets from acquisition through monthly depreciation to final disposal. It maintains immutable asset identification, useful life schedules, and automated General Ledger depreciation postings.
       </p>
 
       {wf}
 
-      <h2>Standard Asset Categories & Depreciation Parameters</h2>
+      <h2>Primary Action Buttons & Screen Controls</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 22%;">Asset Category</th>
-            <th style="width: 18%;">Standard Useful Life</th>
-            <th style="width: 18%;">Depreciation Method</th>
-            <th style="width: 42%;">Linked General Ledger Accounts</th>
+            <th style="width: 25%;">Screen Element</th>
+            <th style="width: 20%;">Visual Style</th>
+            <th style="width: 55%;">On-Screen Function & System Behavior</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">IT & Computer Equipment</td>
-            <td>3 Years (36 Months)</td>
-            <td>Straight-Line (33.33%)</td>
-            <td>Asset: <code>1510</code> • Acc. Dep: <code>1515</code> • Dep Exp: <code>6210</code></td>
+            <td class="col-field">+ Register New Asset</td>
+            <td>Solid Purple Button</td>
+            <td>Opens asset registration form to record asset tag, purchase date, cost, salvage value, and useful life.</td>
           </tr>
           <tr>
-            <td class="col-field">Office Furniture & Fixtures</td>
-            <td>5 Years (60 Months)</td>
-            <td>Straight-Line (20.00%)</td>
-            <td>Asset: <code>1520</code> • Acc. Dep: <code>1525</code> • Dep Exp: <code>6220</code></td>
+            <td class="col-field">Run Depreciation</td>
+            <td>Solid Blue Button</td>
+            <td>Executes the monthly depreciation calculation run, posting straight-line amortization vouchers to GL.</td>
           </tr>
           <tr>
-            <td class="col-field">Motor Vehicles & Trucks</td>
-            <td>4 Years (48 Months)</td>
-            <td>Straight-Line (25.00%)</td>
-            <td>Asset: <code>1530</code> • Acc. Dep: <code>1535</code> • Dep Exp: <code>6230</code></td>
+            <td class="col-field">Excel & PDF</td>
+            <td>Export Buttons</td>
+            <td>Downloads complete fixed asset register with accumulated depreciation and NBV to spreadsheet or PDF.</td>
           </tr>
           <tr>
-            <td class="col-field">Warehouse Machinery</td>
-            <td>7 Years (84 Months)</td>
-            <td>Straight-Line (14.28%)</td>
-            <td>Asset: <code>1540</code> • Acc. Dep: <code>1545</code> • Dep Exp: <code>6240</code></td>
+            <td class="col-field">Category Pills</td>
+            <td>Filter Buttons</td>
+            <td>Filters assets by class: Plant & Machinery (1510), IT Equipment (1520), Motor Vehicles (1530), etc.</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Standard Operating Procedure: Running Monthly Asset Depreciation</h2>
-      <ol class="step-list">
-        <li>Navigate to <strong>Fixed Assets ➔ Asset Registry</strong> and confirm all new monthly asset acquisitions are registered.</li>
-        <li>Click the blue <strong>Run Depreciation Batch</strong> button located above the asset table.</li>
-        <li>Select the closing <strong>Depreciation Period</strong> (e.g. <em>September 2026</em>).</li>
-        <li>Review the pre-calculated depreciation summary displaying monthly expense per asset class and total batch debit.</li>
-        <li>Click <strong>Execute Batch Posting</strong>.</li>
-        <li>The system automatically generates a balanced journal voucher: <strong>Debit Account 6200 (Depreciation Expense)</strong> and <strong>Credit Account 1500 (Accumulated Depreciation)</strong>.</li>
-        <li>The Net Book Value (NBV) on each asset card automatically updates to reflect current period amortization.</li>
-      </ol>
-
-      <h2>Asset Relocation, Disposal & Impairment Workflow</h2>
+      <h2>Asset Register Grid Columns & Field Definitions</h2>
       <table class="doc-table">
         <thead>
           <tr>
-            <th style="width: 25%;">Lifecycle Event</th>
-            <th style="width: 35%;">Action Trigger & Documentation</th>
-            <th style="width: 40%;">System Accounting & Balance Sheet Impact</th>
+            <th style="width: 20%;">Column Header</th>
+            <th style="width: 18%;">Data Type</th>
+            <th style="width: 62%;">On-Screen Information & Accounting Impact</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-field">Branch Asset Transfer</td>
-            <td>Click <em>Transfer Asset</em>; select new branch cost center.</td>
-            <td>Transfers future depreciation expense to new branch P&L.</td>
+            <td class="col-field">Asset Tag #</td>
+            <td>Tag & Serial</td>
+            <td>Physical barcode tag identifier (e.g. <code>AST-2026-0042</code>); clickable to open asset master profile.</td>
           </tr>
           <tr>
-            <td class="col-field">Asset Sale / Disposal</td>
-            <td>Click <em>Retire Asset</em>; enter commercial proceeds and buyer.</td>
-            <td>Dr. Bank / Dr. Acc. Dep / Cr. Asset Cost / Dr./Cr. Gain/Loss on Sale.</td>
+            <td class="col-field">Asset Description</td>
+            <td>Text & Model</td>
+            <td>Equipment specification, brand, model number, and assigned employee custodian.</td>
           </tr>
           <tr>
-            <td class="col-field">Total Asset Scrap</td>
-            <td>Mark asset as <em>Scrapped / Obsolete</em> with board approval.</td>
-            <td>Dr. Impairment Loss (6290) / Dr. Acc. Dep / Cr. Asset Historical Cost.</td>
+            <td class="col-field">Acquisition Cost</td>
+            <td>Historical Cost</td>
+            <td>Capitalized purchase price in AED debited to Fixed Asset Account 1500.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Useful Life & Method</td>
+            <td>Years & Method</td>
+            <td>Depreciation formula (Straight-Line) and statutory economic lifetime (e.g. <em>3 Years</em>, <em>5 Years</em>).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Net Book Value (NBV)</td>
+            <td>Calculated Balance</td>
+            <td>Current balance sheet carrying value (Gross Historical Cost minus Accumulated Depreciation).</td>
+          </tr>
+          <tr>
+            <td class="col-field">Actions</td>
+            <td>Context Menu</td>
+            <td>Menu triggers to <em>View Depreciation History</em>, <em>Record Maintenance</em>, or <em>Post Asset Disposal</em>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Asset Lifecycle States & Retirement Accounting Rules</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Asset State</th>
+            <th style="width: 38%;">Operational Status in Company</th>
+            <th style="width: 40%;">Balance Sheet & General Ledger Treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-field">Active in Service</td>
+            <td>Asset deployed in production or office use.</td>
+            <td>Depreciated monthly; carrying NBV reflected on Balance Sheet.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Fully Depreciated</td>
+            <td>Useful life ended; remaining salvage value.</td>
+            <td>Monthly amortization ceases; remains on registry at residual value.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Disposed / Sold</td>
+            <td>Asset sold to external buyer.</td>
+            <td>Derecognized from Account 1500; recognizes gain/loss on disposal.</td>
+          </tr>
+          <tr>
+            <td class="col-field">Scrapped / Written Off</td>
+            <td>Damaged beyond repair or decommissioned.</td>
+            <td>Writes off remaining NBV directly to Impairment Loss (6700).</td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout">
-        <div class="callout-title">ASSET RETIREMENT & DISPOSAL</div>
-        When an asset is sold or scrapped, open the asset profile and click <strong>Retire Asset</strong>. The system prompts for sale proceeds, calculates the Gain or Loss on Disposal, and automatically offsets the historical cost and accumulated depreciation accounts.
+        <div class="callout-title">AUTOMATED MONTHLY DEPRECIATION POSTING</div>
+        Clicking <strong>Run Depreciation</strong> posts balancing double-entry vouchers: <strong>Debit Account 6100 (Depreciation Expense)</strong> and <strong>Credit Account 1700 (Accumulated Depreciation)</strong>, updating the Balance Sheet NBV automatically.
       </div>
     </div>
     """
