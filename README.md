@@ -36,18 +36,31 @@ Acconeer_ERP_Operations_Manual/
 ├── spectrum_shield.png                  # Background Watermark Crest Asset (Embedded via Base64)
 ├── spectrum_zestwings_logo.png          # High-Res Vector Brand Asset
 │
-├── Acconeer_ERP_UserFlows/              # 21 High-Resolution Application Screenshot Captures
-│   ├── Dashboard/                       # Executive KPI Cockpit
-│   ├── Banking/                         # Bank Accounts & Statement Reconciliation
-│   ├── Customer_Activity/               # Commercial Sales Invoices, Orders & Receipts
-│   ├── Supplier_Activity/               # Vendor Bills, 3-Way Matching & Vendor Master
-│   ├── General_Ledger/                  # Journal Entries & Voucher Reversals
-│   ├── Chart_of_Accounts/               # 5-Digit Hierarchical Account Tree
-│   ├── Inventory/                       # SKU Master, UOM Multipliers & GRN Intake
-│   ├── Assets/                          # Fixed Asset Register & IAS 16 Depreciation
-│   ├── Human_Resources/                 # Employee Master & WPS Payroll Engine
-│   ├── Reports/                         # IFRS Financial Statements & Variance Switches
-│   ├── VAT_Returns/                     # UAE FTA Form 201 Return & EmaraTax Settlement
+├── images/                             # Single Flat Directory Containing All 78 Images (Zero Subfolders)
+│   ├── 01_Executive_Dashboard.png      # Executive KPI Cockpit Capture
+│   ├── 02_Bank_Accounts.png            # Corporate Bank Accounts & GL Asset Hierarchy
+│   ├── 03_Bank_Reconciliation.png      # Dual-Ledger Statement Clearing Capture
+│   ├── 05_Sales_Invoice.png            # Sales Invoicing & AI OCR Document Capture
+│   ├── 03_Sales_Order.png              # Commercial Sales Orders & Fulfillment Register
+│   ├── 03_Bills.png                    # Supplier Bills Register & OCR Scan
+│   ├── 01_Vendor_Directory.png         # Vendor Master & Disbursement Controls
+│   ├── 01_Journal_Entries.png          # General Ledger & Double-Entry Journal Vouchers
+│   ├── 01_Accounts_Tree.png            # 5-Digit Hierarchical Chart of Accounts Tree
+│   ├── 01_Inventory_Master.png         # SKU Catalog, Valuation & Reorder Point Matrix
+│   ├── 11_Goods_Received_Note.png      # Warehouse Intake & 3-Way GRN Verification
+│   ├── 06_Asset_Register.png           # Fixed Assets Register & Depreciation Schedule
+│   ├── 02_Employee_Directory.png       # HR Workforce Directory & Contract Governance
+│   ├── 07_Payroll.png                  # Payroll Processing Engine & CBUAE SIF Export
+│   ├── 01_Financial_Reports.png        # IFRS Financial Statements & Variance Analyzer
+│   ├── 01_VAT_Filing_Dashboard.png     # UAE FTA Form 201 Return & EmaraTax Settlement
+│   ├── mod11_vat_returns.png           # VAT Settlement Posting & Period Closure
+│   ├── 01_Vault_Registry.png           # Document Vault & Encrypted File Management
+│   ├── 01_Security_Audit_Logs.png      # Immutable Audit Trail & Regulatory Logs
+│   ├── 01_Budgeting_Matrix.png         # Departmental Budgeting & Spending Variance
+│   ├── 01_Spectrum_Zestwings_AI.png    # Natural Language AI Assistant Workspace
+│   ├── spectrum-zestwings-logo.png     # Corporate Header Logo Asset
+│   ├── spectrum_shield.png             # Subtle Corporate Watermark Crest Asset
+│   └── ...                             # All additional modular screenshot captures
 │   ├── Document_Vault/                  # RBAC Vault & Statutory Document Retention
 │   ├── Audit_Trail/                     # Append-Only SIEM Logs & Forensic Packages
 │   ├── Budgeting/                       # Cost Center Variance Gateways & CapEx AFEs

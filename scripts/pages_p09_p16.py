@@ -3,7 +3,7 @@ from generate_complete_manual import window_frame
 
 def get_page_09():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Customer_Activity/03_Sales_Order.png",
+        "images/03_Sales_Order.png",
         "Commercial Sales Order Register with Customer Fulfillment Tracking",
         "/customers/orders",
         [
@@ -151,7 +151,7 @@ def get_page_09():
 
 def get_page_10():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Supplier_Activity/03_Bills.png",
+        "images/03_Bills.png",
         "Supplier Purchase Bills Register with AI OCR Scan and AP Status",
         "/bills",
         [
@@ -294,7 +294,7 @@ def get_page_10():
 
 def get_page_11():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Supplier_Activity/01_Vendor_Directory.png",
+        "images/01_Vendor_Directory.png",
         "Vendor and Supplier Master Directory with AP Creditor Telemetry",
         "/vendors",
         [
@@ -442,7 +442,7 @@ def get_page_11():
 
 def get_page_12():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/General_Ledger/01_Journal_Entries.png",
+        "images/01_Journal_Entries.png",
         "General Ledger Journal Entries Register with Double-Entry Verification",
         "/general-ledger",
         [
@@ -590,7 +590,7 @@ def get_page_12():
 
 def get_page_13():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Chart_of_Accounts/01_Accounts_Tree.png",
+        "images/01_Accounts_Tree.png",
         "Chart of Accounts (COA) Hierarchical Tree Structure & Account Mapping",
         "/chart-of-accounts",
         [
@@ -755,7 +755,7 @@ def get_page_13():
 
 def get_page_14():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Inventory/01_Inventory_Master.png",
+        "images/01_Inventory_Master.png",
         "Inventory Master Catalog & Stock Valuation Management",
         "/inventory",
         [
@@ -903,7 +903,7 @@ def get_page_14():
 
 def get_page_15():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Inventory/11_Goods_Received_Note.png",
+        "images/11_Goods_Received_Note.png",
         "Goods Received Notes (GRN) & Warehouse Inbound Intake Register",
         "/inventory/grn",
         [
@@ -1051,7 +1051,7 @@ def get_page_15():
 
 def get_page_16():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Assets/06_Asset_Register.png",
+        "images/06_Asset_Register.png",
         "Fixed Asset Register with Capitalization and Depreciation Schedules",
         "/assets",
         [

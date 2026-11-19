@@ -3,7 +3,7 @@ from generate_complete_manual import window_frame
 
 def get_page_17():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Human_Resources/02_Employee_Directory.png",
+        "images/02_Employee_Directory.png",
         "Employee Master Directory with Workforce Profiles and Department Taxonomy",
         "/hr/employees",
         [
@@ -151,7 +151,7 @@ def get_page_17():
 
 def get_page_18():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Human_Resources/07_Payroll.png",
+        "images/07_Payroll.png",
         "Monthly Payroll Processing Engine with Timesheet Locking and WPS SIF Export",
         "/hr/payroll",
         [
@@ -289,7 +289,7 @@ def get_page_18():
 
 def get_page_19():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Reports/01_Financial_Reports.png",
+        "images/01_Financial_Reports.png",
         "Financial Statements & Executive Reporting Suite with Analytical Ratios",
         "/reports/financials",
         [
@@ -427,7 +427,7 @@ def get_page_19():
 
 def get_page_20():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/VAT_Returns/01_VAT_Filing_Dashboard.png",
+        "images/01_VAT_Filing_Dashboard.png",
         "UAE VAT Return (Form VAT 201) Preparation Workspace & FTA Compliance",
         "/tax/vat201",
         [
@@ -575,7 +575,7 @@ def get_page_20():
 
 def get_page_21():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/focused/mod11_vat_returns.png",
+        "images/mod11_vat_returns.png",
         "VAT Return Form 201 Detailed Box Inspection & Settlement Workflow",
         "/tax/vat201/detail",
         [
@@ -696,7 +696,7 @@ def get_page_21():
 
 def get_page_22():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Document_Vault/01_Vault_Registry.png",
+        "images/01_Vault_Registry.png",
         "Company Document Repository & Enterprise Governance Vault",
         "/vault",
         [
@@ -834,7 +834,7 @@ def get_page_22():
 
 def get_page_23():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Audit_Trail/01_Security_Audit_Logs.png",
+        "images/01_Security_Audit_Logs.png",
         "Security Audit Trail & Real-Time User Activity Log with Live Inspector",
         "/audit-trail",
         [
@@ -982,7 +982,7 @@ def get_page_23():
 
 def get_page_24():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Budgeting/01_Budgeting_Matrix.png",
+        "images/01_Budgeting_Matrix.png",
         "Fiscal Budgeting & Variance Matrix with Real-Time GL Tracking",
         "/budgeting",
         [
@@ -1115,7 +1115,7 @@ def get_page_24():
 
 def get_page_25():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/AI_Assistant/01_Spectrum_Zestwings_AI.png",
+        "images/01_Spectrum_Zestwings_AI.png",
         "Spectrum Zestwings AI Financial Assistant & Conversational Copilot",
         "/copilot",
         [

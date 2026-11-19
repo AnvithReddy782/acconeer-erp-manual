@@ -3,15 +3,17 @@ import os
 import base64
 
 def get_base64_logo():
-    if os.path.exists("spectrum-zestwings-logo.png"):
-        with open("spectrum-zestwings-logo.png", "rb") as f:
-            return f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+    for p in ["images/spectrum-zestwings-logo.png", "spectrum-zestwings-logo.png"]:
+        if os.path.exists(p):
+            with open(p, "rb") as f:
+                return f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
     return ""
 
 def get_base64_shield():
-    if os.path.exists("spectrum_shield.png"):
-        with open("spectrum_shield.png", "rb") as f:
-            return f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+    for p in ["images/spectrum_shield.png", "spectrum_shield.png"]:
+        if os.path.exists(p):
+            with open(p, "rb") as f:
+                return f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
     return ""
 
 def window_frame(img_path, caption, route, legend_items):

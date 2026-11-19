@@ -594,7 +594,7 @@ def get_page_04():
 
 def get_page_05():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Dashboard/01_Executive_Dashboard.png",
+        "images/01_Executive_Dashboard.png",
         "Executive Financial Dashboard & Live Real-Time Telemetry Cockpit",
         "/dashboard",
         [
@@ -727,7 +727,7 @@ def get_page_05():
 
 def get_page_06():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Banking/02_Bank_Accounts.png",
+        "images/02_Bank_Accounts.png",
         "Banking Master & Corporate Cash Ledger Account Structure",
         "/banking",
         [
@@ -847,7 +847,7 @@ def get_page_06():
 
 def get_page_07():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Banking/03_Bank_Reconciliation.png",
+        "images/03_Bank_Reconciliation.png",
         "Bank Reconciliation & General Ledger Statement Matching Interface",
         "/banking/reconciliation",
         [
@@ -980,7 +980,7 @@ def get_page_07():
 
 def get_page_08():
     wf = window_frame(
-        "Acconeer_ERP_UserFlows/Customer_Activity/05_Sales_Invoice.png",
+        "images/05_Sales_Invoice.png",
         "Commercial Sales Invoicing Register with Tax Invoice Creation and AR Status",
         "/invoices",
         [
